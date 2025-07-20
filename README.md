@@ -5,7 +5,7 @@
 
 **SOAFT** is a secure online assessment platform designed to help educators create, deliver, and grade tests with built-in academic integrity protection. This MVP addresses key challenges in online education: cheating prevention, automated grading, and instant feedback.
 
-![SOAFT Dashboard Preview](./src/assets/screenshots/dashboard-preview.png)
+![SOAFT Dashboard Preview](./src/assets/screenshots/dashbord-preview.png)
 
 ---
 ## 🎯 Objective
