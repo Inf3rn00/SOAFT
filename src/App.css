@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@theme {
+  --color-background-blue: #5046e5;
+  --color-background-white: #ffffff;
+  --color-background-offwhite: #f0f1f2;
+  --color-logo-blue: #282373;
+  --color-purple: #8743be;
+  --color-black: #000000;
+  --color-lavendar: #d8dcf8;
+  --font-Sonsie-One: Sonsie One, sans-serif;
+  --font-Monteserrat: Montserrat, sans-serif;
+}

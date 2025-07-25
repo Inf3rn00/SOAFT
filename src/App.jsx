@@ -1,9 +1,10 @@
 import "./App.css";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div className="text-center">
-      <h1 className="text-3xl font-bold ">SOAFT</h1>
+    <div className="font-Monteserrat">
+      <LandingPage></LandingPage>
     </div>
   );
 }
