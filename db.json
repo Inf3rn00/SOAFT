@@ -1,0 +1,26 @@
+{
+    "users" : [
+        {
+            "student" : [
+                {
+                    "id" : "",
+                    "first-name": "",
+                    "last-name": "",
+                    "email": "",
+                    "institute" : "",
+                    "password": ""
+                }
+            ],
+            "admin" : [
+                {
+                    "id" : "",
+                    "first-name": "",
+                    "last-name": "",
+                    "email": "",
+                    "institute" : "",
+                    "password": ""
+                }
+            ]
+        }
+    ]
+}
