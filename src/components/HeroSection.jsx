@@ -1,7 +1,7 @@
 const HeroSection = () => {
   return (
-    <div className="bg-lavendar">
-      <div className="flex  p-4 mx-14 h-[530px]">
+    <div className="bg-lavendar relative pb-5">
+      <div className="flex  p-4 mx-14 h-[600px]">
         <section className="w-1/2 flex flex-col justify-center content-center gap-6">
           <h1 className="text-purple text-4xl font-bold">
             Secure AI-Powered <br /> Online Assessment
@@ -35,9 +35,8 @@ const HeroSection = () => {
                 alt=""
                 className="w-12 h-12 rounded-[50%] border-solid border-white border-[1px] absolute left-[110px]"
               />
-             
             </section>
-             <p className="ml-[120px] mt-[15px]">
+            <p className="ml-[120px] mt-[15px]">
               Trusted by over <b>5000</b> users
             </p>
           </div>
@@ -55,6 +54,11 @@ const HeroSection = () => {
           />
         </section>
       </div>
+      <img
+        src="images/DownCurve.svg"
+        className="absolute w-full  rotate-180 bottom-[-15px] h-[100px]"
+        alt=""
+      />
     </div>
   );
 };
