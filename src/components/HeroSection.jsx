@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const HeroSection = () => {
   return (
     <div className="bg-lavendar relative pb-5">
@@ -10,9 +12,10 @@ const HeroSection = () => {
             Create, proctor and grade tests in minutes with built-in <br />{" "}
             plagiarism check and a distraction-free environment
           </p>
-          <button className="bg-background-blue text-white w-[150px] h-[48px] rounded-lg text-[16px] hover: cursor-pointer">
+          <Link to="/login"><button className="bg-background-blue text-white w-[150px] h-[48px] rounded-lg text-[16px] hover: cursor-pointer">
             Get Started Free
-          </button>
+          </button></Link>
+          
           <div className="flex content-center gap-2">
             <section className="flex relative">
               <img
