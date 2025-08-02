@@ -6,6 +6,7 @@ import EducatorTrust from "../components/EducatorTrust";
 import TransparentPricing from "../components/TransparentPricing";
 import Testimonial from "../components/Testimonial";
 import TransferAssesment from "../components/TransferAssesment";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
@@ -17,7 +18,8 @@ const LandingPage = () => {
       <EducatorTrust />
       <TransparentPricing />
       <Testimonial />
-      <TransferAssesment/>
+      <TransferAssesment />
+      <Footer />
     </div>
   );
 };
