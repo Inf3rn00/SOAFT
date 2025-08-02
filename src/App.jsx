@@ -3,9 +3,16 @@ import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div className="font-Monteserrat">
-      <LandingPage></LandingPage>
-    </div>
+
+    <Router>
+      <Routes>
+        <Route>
+          <Route path="/" element = {<LandingPage />}/>
+          <Route path="/login" element = {<Login />} />
+        </Route>
+      </Routes>
+    </Router>
+
   );
 }
 
