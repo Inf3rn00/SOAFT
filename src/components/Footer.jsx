@@ -2,8 +2,9 @@ import curvyEdge from "/Icons/landing page icons/wavesNegative.svg";
 import telephone from "/Icons/landing page icons/Telephone.svg";
 import mail from "/Icons/landing page icons/Mail.svg";
 import logo from "/Icons/landing page icons/LOGO.png";
-
 import location from "/Icons/landing page icons/Location.svg";
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   return (
@@ -19,8 +20,9 @@ const Footer = () => {
           </section>
           <section className="w-1/2 flex justify-center items-center gap-30">
             <div className="flex flex-col gap-5">
+
               <h1 className="font-bold text-xl">Navigation</h1>
-              <p>Home</p>
+              <a href="#">Home</a>
               <p>How it works</p>
               <p>Pricing</p>
               <p>Contact Us</p>

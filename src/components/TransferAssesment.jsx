@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const TransferAssesment = () => {
   return (
     <div className="mt-15 bg-background-offwhite relative  pb-90 ">
@@ -17,10 +19,11 @@ const TransferAssesment = () => {
           </p>
           <div className="flex gap-4 w-full">
             <button className="bg-background-blue text-white p-2 w-1/3 rounded-lg cursor-pointer">
-              Get Started Free
+              <Link to="/login">Get Started Free</Link>
             </button>
+
             <button className="bg-background-offwhite outline-1 outline-background-blue text-background-blue p-2 w-1/3 rounded-lg cursor-pointer">
-              Login
+              <Link to="/login">Login</Link>
             </button>
           </div>
         </section>
