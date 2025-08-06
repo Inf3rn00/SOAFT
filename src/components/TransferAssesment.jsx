@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 const TransferAssesment = () => {
   return (
     <div className="mt-15 bg-background-offwhite relative  pb-90 ">
@@ -21,14 +20,19 @@ const TransferAssesment = () => {
             <button className="bg-background-blue text-white p-2 w-1/3 rounded-lg cursor-pointer">
               <Link to="/login">Get Started Free</Link>
             </button>
-
             <button className="bg-background-offwhite outline-1 outline-background-blue text-background-blue p-2 w-1/3 rounded-lg cursor-pointer">
               <Link to="/login">Login</Link>
             </button>
           </div>
         </section>
-        <section className="w-1/2 flex justify-center items-center">
-          <img src="/images/Student2Image.jpg" alt="" className="w-4/5" />
+        <section className="w-1/2 flex justify-center items-center ">
+          <div className=" w-4/6 overflow-hidden [clip-path:polygon(0%_100%,_100%_100%,_80%_0%,0%_0%)]">
+            <img
+              src="/images/Student2Image.jpg"
+              alt=""
+              className="w-full h-full  rounded-2xl mt-6 object-cover  "
+            />
+          </div>
         </section>
       </div>
     </div>
