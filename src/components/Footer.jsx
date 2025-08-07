@@ -10,6 +10,9 @@ const Footer = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
+    if(!email.includes("@") || !email.includes(".")) {
+      alert("Please enter a valid email address.");
+    }
     console.log(email)
     setEmail(""); // Clear the input field after submission
   }
