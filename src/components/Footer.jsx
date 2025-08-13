@@ -2,13 +2,43 @@ import curvyEdge from "/Icons/landing page icons/wavesNegative.svg";
 import telephone from "/Icons/landing page icons/Telephone.svg";
 import mail from "/Icons/landing page icons/Mail.svg";
 import logo from "/Icons/landing page icons/LOGO.png";
-
 import location from "/Icons/landing page icons/Location.svg";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if(!email.includes("@") || !email.includes(".")) {
+      alert("Please enter a valid email address.");
+    }
+    console.log(email)
+    setEmail(""); // Clear the input field after submission
+  }
+
   return (
     <div className="h-[550px] bg-background-blue relative">
       <img src={curvyEdge} alt="" className="w-screen  absolute top-[-140px]" />
+      <div className="absolute bg-lavendar w-[470px] h-[300px] rounded-2xl top-[-300px] left-12">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
+          <label htmlFor="" className="text-2xl font-bold">
+            Subscribe
+          </label>
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full p-4 bg-white rounded-xl outline-0 mt-2"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          
+
+          <button className="w-full p-4 bg-white rounded-xl text-purple font-bold cursor-pointer ">
+            Subscribe Now
+          </button>
+        </form>
+      </div>
       <div className="flex flex-col gap-4 justify-center items-center h-full">
         <div className="flex justify-between items-center h-full px-10 text-white">
           <section className="w-1/2 mt-[-150px]">
@@ -68,5 +98,4 @@ const Footer = () => {
     </div>
   );
 };
-
 export default Footer;

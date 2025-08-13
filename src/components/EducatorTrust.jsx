@@ -17,11 +17,13 @@ const EducatorTrust = () => {
           Why Educators Trust SOAFT
         </h1>
         <div className="flex justify-center items-center p-4">
-          <img
-            src="/images/StudentsImage.jpg"
-            alt=""
-            className="w-[400px] h-[500px] rounded-2xl "
-          />
+          <div className="w-[380px] h-[500px] overflow-hidden [clip-path:polygon(0%_100%,_100%_100%,_100%_15%,0%_0%)] rounded-2xl">
+            <img
+              src="/images/StudentsImage.jpg"
+              alt="Students"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </section>
       <section className="w-3/5 grid grid-cols-2 gap-10 place-content-center mt-40">
