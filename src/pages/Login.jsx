@@ -4,7 +4,6 @@ import Ai_icon from "/Icons/Form icons/Ai - powered icon.svg";
 import Built_in_plagiarism from "/Icons/Form icons/Built-In plagiarism icon.svg";
 import Distraction_Free from "/Icons/Form icons/DistractionFree icon.svg";
 import { Link } from "react-router-dom";
-
 const Login = () => {
   // Track the selected role (either "student" or "admin")
   const [role, setRole] = useState("student");
@@ -194,9 +193,7 @@ const Login = () => {
 
                   {/* Login button */}
                   <button className="w-full bg-[#5046e5] h-8 my-3 rounded text-[#ffffff] font-medium">
-                   <Link to="/Admin/*">Sign in</Link>
-
-                   
+                    Sign in
                   </button>
                 </form>
               )}
