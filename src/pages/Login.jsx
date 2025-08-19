@@ -194,7 +194,7 @@ const Login = () => {
 
                   {/* Login button */}
                   <button className="w-full bg-[#5046e5] h-8 my-3 rounded text-[#ffffff] font-medium">
-                   <Link to="/Admin/*">Sign in</Link>
+                   <Link to="/Admin/">Sign in</Link>
 
                    
                   </button>
