@@ -8,13 +8,14 @@ import RecentSubmissions from "../components/RecentSubmissions";
 import UpcomingTest from "../components/UpcomingTest";
 import PlagiarismOverview from "../components/PlagiarismOverview";
 import SecurityAlert from "../components/SecurityAlert";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
     <div className="bg-[#f0f1f2] w-full">
       <div className="p-5 flex justify-between items-center">
         <div>
-          <h1 className="text-[32px] font-semibold">Dashboard</h1>
+          <h1 className="text-[32px] font-semibold cursor-pointer">Dashboard</h1>
           <p className="text-[#6c757d] mt-2">Welcome back, professor Ogunleye</p>
         </div>
         <div className="flex items-center gap-4">
