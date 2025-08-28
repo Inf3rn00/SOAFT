@@ -9,7 +9,7 @@ const AdminStatisticsCard = () => {
     ];
     return (
     <div>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 p-5'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 p-3'>
             {/* Statistics Cards */}
             {statistics.map((stat, index) => (
                 <div key={index} className="flex items-center justify-between p-2 bg-[#ffffff] rounded-[8px] shadow-md">

@@ -25,7 +25,7 @@ const AdminSidebar = () => {
                 <div className='font-semibold text-[16px] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto'>
                 {sidebarItems.map((item) => (
                     // Each sidebar item as a link
-                        <Link to={item.link} className='px-3 hover:bg-[#f4f4f7] rounded-4xl w-[90%] h-[50px] flex items-center' key={item.label}>
+                        <Link to={item.link} className='px-2 hover:bg-[#f4f4f7] rounded-4xl w-[90%] h-[50px] flex items-center' key={item.label}>
                             <div className='flex items-center'>
                             {item.icon}
                             <span className='ml-2'>{item.label}</span>
