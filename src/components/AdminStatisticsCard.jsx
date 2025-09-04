@@ -1,11 +1,16 @@
 import React from 'react'
+import ActiveTest from '/Icons/Admin page Icons/ActiveTest.svg';
+import totalStudents from '/Icons/Admin page Icons/TotalStudent.svg';
+import Submissions from '/Icons/Admin page Icons/Submission.svg';
+import PendingGrading from '/Icons/Admin page Icons/PendingGrade.svg';
+
 
 const AdminStatisticsCard = () => {
     const statistics = [
-        { title: "Active Tests", quantity: 8, icon: "📊", percentage: 12, updatefrom: "from last week" },
-        { title: "Total Student", quantity: 243, icon: "👩‍🎓", percentage: 5, updatefrom: "from last month" },
-        { title: "Submissions", quantity: 187, icon: "🆕", percentage: 18, updatefrom: "from last Month" },
-        { title: "Pending Grading", quantity: 24, icon: "⏳", percentage: 7, updatefrom: "from last month" }
+        { title: "Active Tests", quantity: 8, icon: ActiveTest, percentage: 12, updatefrom: "from last week" },
+        { title: "Total Student", quantity: 243, icon: totalStudents, percentage: 5, updatefrom: "from last month" },
+        { title: "Submissions", quantity: 187, icon: Submissions, percentage: 18, updatefrom: "from last Month" },
+        { title: "Pending Grading", quantity: 24, icon: PendingGrading, percentage: 7, updatefrom: "from last month" }
     ];
     return (
     <div>
@@ -29,7 +34,7 @@ const AdminStatisticsCard = () => {
                         </div>
                         {/* Statistics Icon */}
                         <div className='w-[40px] h-[40px] rounded-full bg-[#f0f0f0] flex items-center justify-center'>
-                            <span className="text-2xl">{stat.icon}</span>
+                            <img className="text-2xl" src={stat.icon}></img>
                         </div>
                     </div>
                 </div>

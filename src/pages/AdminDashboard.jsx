@@ -20,7 +20,7 @@ const AdminDashboard = () => {
         </div>
         <div className="flex items-center gap-4">
           <div className="border border-[#e5e5e5] rounded-lg px-4 py-2 flex items-center gap-2 w-fit">
-            <BiCalendar size={18} className="text-gray-500" />
+            <BiCalendar size={20} className="text-gray-500" />
             <span className="text-gray-700 font-medium">June 10, 2025</span>
           </div>
           <button className="flex items-center bg-[#5046e5] text-[#ffffff] font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer">

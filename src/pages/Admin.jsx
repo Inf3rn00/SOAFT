@@ -7,6 +7,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import NavbarAdimin from "../components/NavbarAdimin";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
+import AdvancedResultStats from "./ResultPages/AdvancedResultStats";
 
 const Admin = () => {
   return (
@@ -22,6 +23,7 @@ const Admin = () => {
           <Route index element={<AdminDashboard />} />
           <Route path="assessment" element={<Assessment />} />
           <Route path="result" element={<Result />} />
+          <Route path="result/advancedStat/:id" element={<AdvancedResultStats />} />
           <Route path="question-bank" element={<QuestionBank />} />
           <Route path="settings" element={<Settings />} />
         </Routes>
