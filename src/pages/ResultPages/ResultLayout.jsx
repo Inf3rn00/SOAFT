@@ -1,13 +1,11 @@
-import AdvancedResultStats from "./AdvancedResultStats";
-import Result from "./Result";
-
+import { Outlet } from 'react-router-dom';
 
 const ResultLayout = () => {
-    return (  <div>
-      <Result></Result>
-      <AdvancedResultStats></AdvancedResultStats>
-    </div>
+    return (  
+      <div>
+        <Outlet /> {/* This will render the matched child route */}
+      </div>
     );
 }
- 
+
 export default ResultLayout;

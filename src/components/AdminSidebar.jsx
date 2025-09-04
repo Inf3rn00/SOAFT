@@ -18,7 +18,7 @@ const AdminSidebar = () => {
                 {/* Logo */}
                 <div className="flex items-center h-17 border-b border-b-[#f0f1f2]">
                     <div className="w-[80%] mx-auto">
-                        <img src={logo} alt="Logo" className="h-[43px] w-[48px]" />
+                        <Link to='/'><img src={logo} alt="Logo" className="h-[43px] w-[48px]" /></Link>
                     </div>
                 </div>
                 {/* Sidebar Items */}
