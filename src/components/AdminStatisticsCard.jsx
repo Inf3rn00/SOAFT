@@ -23,7 +23,7 @@ const AdminStatisticsCard = () => {
                         <div className='flex flex-col gap-5'>
                             {/* Statistics Title */}
                             <h3 className='text-[#2e2e2e] text-[18px] font-semibold'>{stat.title}</h3>
-                            {/* Statistics Quantity */}
+                            {/* Statistics Quantity */} 
                             <p className='text-[28px] font-semibold'>{stat.quantity}</p>
                             {/* Statistics Percentage */}
                             <p className={`text-sm flex gap-x-4 ${stat.percentage > 0 ? 'text-green-500' : 'text-red-500'}`}>
