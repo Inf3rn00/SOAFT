@@ -11,13 +11,13 @@ import AdminDashboard from "./AdminDashboard";
 const Admin = () => {
     return (
         <div className="flex flex-row w-full">
-        <div className="fixed w-[20%]">
+        <div className="fixed w-[19%]">
             <AdminSidebar />
         </div>
-        <div className="fixed h-screen w-[80%] ml-[20%]">
+        <div className="fixed h-screen w-[81%] ml-[19%]">
             <NavbarAdimin />
         </div>
-        <div className="ml-[20%] mt-17 w-full flex justify-center items-center">
+        <div className="ml-[19%] mt-17 w-full flex justify-center items-center">
             <Routes>
                 <Route index element={<AdminDashboard />} />
                 <Route path="assessment" element={<Assessment />} />
