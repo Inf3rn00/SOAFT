@@ -4,8 +4,6 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 
-import Login from "./pages/Login";
-
 function App() {
   return (
     <div className="font-Monteserrat">
