@@ -21,7 +21,7 @@ const data = [
 
 const TestPerformanceChart = () => {
     return (
-        <div className="bg-white rounded-[16px] shadow-md p-5">
+        <div className="bg-white rounded-[16px] shadow-md p-5 ">
         <div style={{ width: "100%", height: '445px' }}>
             <h2 style={{ marginBottom: "10px" }} className="text-[22px] font-semibold">Test performance</h2>
             <ResponsiveContainer>
