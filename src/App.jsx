@@ -7,6 +7,7 @@ import AdvancedResultStats from "./pages/ResultPages/AdvancedResultStats.jsx";
 import ResultLayout from "./pages/ResultPages/ResultLayout.jsx";
 import Result from "./pages/ResultPages/Result.jsx";
 
+
 function App() {
   return (
     <div className="font-Monteserrat">
