@@ -2,9 +2,9 @@ import { useState } from "react";
 
 const ProfileInfo = () => {
   return (
-    <div className=" p-5 ">
-      <form>
-        <section className="rounded-lg shadow-md p-5 bg-white">
+    <div className="p-5 min-h-screen overflow-y-auto">
+      <form className="h-auto">
+        <section className="rounded-lg shadow-md p-5 bg-white mb-10">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-semibold ">Profile Information</h1>
             <button className="flex items-center bg-[#5046e5] text-white font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer">
@@ -28,8 +28,9 @@ const ProfileInfo = () => {
                   <label htmlFor="firstname">First Name</label>
                   <input
                     type="text"
-                    className=" border-1 border-solid border-gray-400 p-2 w-90"
+                    className=" border-1 border-solid border-gray-400 p-2 w-80"
                     name="firstname"
+                    placeholder="Ogunleye"
                     required
                   />
                 </div>
@@ -37,8 +38,9 @@ const ProfileInfo = () => {
                   <label htmlFor="lastname">Last Name</label>
                   <input
                     type="text"
-                    className=" border-1 border-solid border-gray-400 p-2 w-90"
+                    className=" border-1 border-solid border-gray-400 p-2 w-80"
                     name="lastname"
+                    placeholder="Olabisi"
                     required
                   />
                 </div>
@@ -48,8 +50,9 @@ const ProfileInfo = () => {
                   <label htmlFor="email">Email</label>
                   <input
                     type="Email"
-                    className=" border-1 border-solid border-gray-400 p-2 w-90"
+                    className=" border-1 border-solid border-gray-400 p-2 w-80"
                     name="email"
+                    placeholder="Example@gmail.com"
                     required
                   />
                 </div>
@@ -57,25 +60,38 @@ const ProfileInfo = () => {
                   <label htmlFor="number">Phone Number</label>
                   <input
                     type="text"
-                    className=" border-1 border-solid border-gray-400 p-2 w-90"
+                    className=" border-1 border-solid border-gray-400 p-2 w-80"
                     name="number"
+                    placeholder="+2349087654320"
                     required
                   />
                 </div>
               </div>
 
-             
-                <div className="flex flex-col gap-2 p-5">
-                  <label htmlFor="job-title">Job Title</label>
-                  <input
-                    type="text"
-                    className=" border-1 border-solid border-gray-400 p-2"
-                    name="job-title"
-                    required
-                  />
-                </div>
-              
+              <div className="flex flex-col gap-2 p-5">
+                <label htmlFor="job-title">Job Title</label>
+                <input
+                  type="text"
+                  className=" border-1 border-solid border-gray-400 p-2"
+                  name="job-title"
+                  placeholder="Professor"
+                  required
+                />
+              </div>
             </div>
+          </div>
+
+          <hr className="text-gray-500 my-5 w-full " />
+          <div>
+            <div className="flex flex-col gap-2 p-5">
+                <label htmlFor="bio">Bio</label>
+                <textarea
+                  className="border-1 border-solid border-gray-400 p-2 h-24 "
+                  name="bio"
+                  placeholder="Educationalist specialist with over 10 years of experience in curriculum development and assessment design. Passionate about creating learning experiences and meaningful assessment."
+                  required
+                />
+              </div>
           </div>
         </section>
       </form>
