@@ -2,7 +2,7 @@ import React from "react";
 import Assessment from "../pages/Assessment";
 import Result from "./ResultPages/Result";
 import QuestionBank from "../pages/QuestionBank";
-import Settings from "../pages/Settings";
+import Settings from "../pages/SettingsPages/Settings";
 import AdminSidebar from "../components/AdminSidebar";
 import NavbarAdimin from "../components/NavbarAdimin";
 import { Route, Routes } from "react-router-dom";
