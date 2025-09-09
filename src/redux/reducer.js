@@ -1,5 +1,5 @@
 
-
+// global state object
 const initialState = {
   students: [
     {
@@ -86,8 +86,10 @@ const initialState = {
   admin: [],
 };
 
+// reducer function to handle state changes
 export const userReducer = (state = initialState, action) => {
-  
-  return state;
-  
+  switch (action.type) {
+    default:
+      return state;
+  }
 };

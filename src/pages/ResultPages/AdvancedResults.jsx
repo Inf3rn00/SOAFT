@@ -6,9 +6,6 @@ import { submittedTime } from "../../utils/timeUtils.js";
 const AdvancedResults = () => {
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
- 
-
-  // handle submitted time logic
 
   return (
     <section className="p-5 w-full ">
