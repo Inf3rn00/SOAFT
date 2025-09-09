@@ -9,6 +9,8 @@ import Result from "./pages/ResultPages/Result.jsx";
 
 
 function App() {
+
+
   return (
     <div className="font-Monteserrat">
       <Router>
@@ -19,7 +21,7 @@ function App() {
            <Route path="result" element={<ResultLayout />}>
             <Route index element={<Result />} />{" "}
             {/* Shows when /result is accessed */}
-            <Route path="advancedStat/:id" element={<AdvancedResultStats />} />
+            {/* <Route path="advancedStat/:id" element={<AdvancedResultStats />} /> */}
           </Route>
           
           </Route>
