@@ -1,0 +1,95 @@
+
+// global state object
+const initialState = {
+  students: [
+    {
+      id: 1,
+      name: "Joseph Ayodeji",
+      email: "Joseph.deji@university.edu",
+      submitted: new Date().toISOString(),
+      "time-spent": "2 hours",
+      "School-grade": "Top 5%",
+      image: "/images/Heroface1.jpg",
+      textContent: "Advanced Statistics Midterm Examination",
+      flags: "No Flags",
+      similarity: "5% Similarity",
+      "Assesment-deatails": "45 questions",
+      finalScore: "42/45",
+      integrityCheck: 3,
+      plagiarismScore: 3,
+    },
+    {
+      id: 2,
+      name: "Aisha Mohammed",
+      email: "Aisha.mohammed@university.edu",
+      submitted: "2025-08-28T10:30:00",
+      "time-spent": "1 hour, 45 minutes",
+      "School-grade": "Top 10%",
+      image: "/images/Heroface2.jpg",
+      textContent: "Advanced Statistics Midterm Examination",
+      flags: "No Flags",
+      similarity: "8% Similarity",
+      "Assesment-deatails": "45 questions",
+      finalScore: "40/45",
+      integrityCheck: 3,
+      plagiarismScore: 2,
+    },
+    {
+      id: 3,
+      name: "Chukwudi Nwachukwu",
+      email: "Chukwudi.nwa@university.edu",
+      submitted: "2025-08-27T14:15:00",
+      "time-spent": "2 hours, 10 minutes",
+      "School-grade": "Top 25%",
+      image: "/images/Heroface3.jpg",
+      textContent: "Advanced Statistics Midterm Examination",
+      flags: "Behavioral Flagged",
+      similarity: "15% Similarity",
+      "Assesment-deatails": "45 questions",
+      finalScore: "35/45",
+      integrityCheck: 2,
+      plagiarismScore: 4,
+    },
+    {
+      id: 4,
+      name: "Fatima Aliyu",
+      email: "Fatima.aliyu@university.edu",
+      submitted: "2025-08-28T09:00:00",
+      "time-spent": "1 hour, 55 minutes",
+      "School-grade": "Top 15%",
+      image: "/images/Heroface4.jpg",
+      textContent: "Advanced Statistics Midterm Examination",
+      flags: "No Flags",
+      similarity: "6% Similarity",
+      "Assesment-deatails": "45 questions",
+      finalScore: "38/45",
+      integrityCheck: 3,
+      plagiarismScore: 3,
+    },
+    {
+      id: 5,
+      name: "Bello Emeka",
+      email: "Bello.emeka@university.edu",
+      submitted: "2025-08-27T16:40:00",
+      "time-spent": "2 hours, 30 minutes",
+      "School-grade": "Top 50%",
+      image: "/images/Heroface5.jpg",
+      textContent: "Advanced Statistics Midterm Examination",
+      flags: "Late Submission",
+      similarity: "12% Similarity",
+      "Assesment-deatails": "45 questions",
+      finalScore: "30/45",
+      integrityCheck: 1,
+      plagiarismScore: 5,
+    },
+  ],
+  admin: [],
+};
+
+// reducer function to handle state changes
+export const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
