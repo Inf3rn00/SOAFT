@@ -84,7 +84,7 @@ const Login = () => {
               </p>
 
               {/* Role switcher: Student or Admin */}
-              <p className="mt-5 mb-3 font-medium">I am a:</p>
+              <p className="mt-5 mb-3 font-medium">I am a/an:</p>
               <div className="border border-[#5046e5] rounded-full h-8 flex">
                 {/* Student tab */}
                 <button

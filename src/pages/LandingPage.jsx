@@ -10,7 +10,7 @@ import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
-    <div className="max-w-7xl mx-auto min-h-screen overflow-hidden">
+    <div className="max-w-[1600px] mx-auto min-h-screen overflow-hidden">
       <Navbar />
       <HeroSection />
       <SecondHero />

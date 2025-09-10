@@ -1,5 +1,3 @@
-import React from "react";
-import { FaDownload } from "react-icons/fa";
 import ProfileInfo from "./ProfileInfo";
 
 const Settings = () => {
