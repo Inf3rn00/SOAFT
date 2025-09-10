@@ -15,5 +15,23 @@ export const basicSchema = yup.object().shape({
     .string()
     .required("Please input your Phone Number"),
   jobTitle: yup.string().required("This field is required"),
-  bio: yup.string().required("This field is required")
+  bio: yup.string().required("This field is required"),
+
 });
+
+
+export const passwordSchema = yup.object().shape({
+  currentPassword: yup.string(),
+   newPassword: yup
+    .string()
+    .matches(
+      passwordRules,
+      "Must contain 8+ chars, 1 uppercase, 1 number, 1 special character"
+    )
+    .required("Password is required"),
+    
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('newPassword'), null], "Passwords must match")
+    .required("Password is required"),
+})

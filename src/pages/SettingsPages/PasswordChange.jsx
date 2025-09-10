@@ -1,192 +1,192 @@
-// import { useFormik } from "formik";
-// import { useState } from "react";
-// import { basicSchema } from "../../schema/validation";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { passwordSchema } from "../../schema/validation";
 
-// // Ogunleye
-// // Olabisi
-// // Example@yahoo.com
-// // 09012345678
-// // Professor
-// // Educationalist specialist with over 10 years of experience in curriculum development and assessment design. Passionate about creating learning experiences and meaningful assessment.
+const PasswordChange = () => {
+  const onSubmit = () => {
+    alert("Password Updated");
+    formik.resetForm({
+      values: {
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      },
+    });
+  };
 
-// const PasswordChange = () => {
-//   const onSubmit = () => {
-//     alert(
-//       `Form submitted by ${formik.values.jobTitle} ${formik.values.firstName} `
-//     );
-//   };
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
 
-//   const formik = useFormik({
-//     initialValues: {
-//       firstName: "",
-//       lastName: "",
-//       email: "",
-//       phoneNumber: "",
-//       jobTitle: "",
-//       bio: "",
-//     },
+  const handlClick = () => {
+    setShow(!show);
+  };
+  const handlClick2 = () => {
+    setShow2(!show2);
+  };
+  const handlClick3 = () => {
+    setShow3(!show3);
+  };
 
-//     validationSchema: basicSchema,
-//     onSubmit,
-//   });
+  const formik = useFormik({
+    initialValues: {
+      currentPassword: "12345678",
+      newPassword: "",
+      confirmPassword: "",
+    },
 
-//   console.log(formik.errors);
+    validationSchema: passwordSchema,
+    onSubmit,
+  });
 
-//   return (
-//     <div className="p-5 min-h-screen overflow-y-auto">
-//       <form className="h-auto" onSubmit={formik.handleSubmit}>
-//         <section className="rounded-lg shadow-md p-5 bg-white mb-10">
-//           <div className="flex justify-between items-center">
-//             <h1 className="text-2xl font-semibold ">Profile Information</h1>
-//             <button
-//               className="flex items-center bg-[#5046e5] text-white font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer"
-//               type="submit"
-//             >
-//               Save Changes
-//             </button>
-//           </div>
+  console.log(formik.errors);
 
-//           <hr className="text-gray-500 my-10 w-full " />
-//           <div className="flex">
-//             <div className="flex flex-col items-center gap-4 pt-10 w-1/4  ">
-//               <img
-//                 src="/images/Testimonialface.jpg"
-//                 className="w-20 h-20 rounded-[50%]"
-//                 alt=""
-//               />
-//               <p className="text-background-blue">Change Photo</p>
-//             </div>
-//             <div className="w-3/4 ">
-//               <div className="flex justify-between items-center p-5">
-//                 <div className="flex flex-col gap-2">
-//                   <label htmlFor="firstName">First Name</label>
-//                   <input
-//                     type="text"
-//                     className={` ${
-//                       formik.errors.firstName && formik.touched.firstName
-//                         ? "border-red-600 border-solid border-1 p-2 w-80"
-//                         : "border-1 border-solid border-gray-400 p-2 w-80"
-//                     }`}
-//                     name="firstName"
-//                     value={formik.values.firstName}
-//                     onChange={formik.handleChange}
-//                   />
-//                   {formik.errors.firstName && formik.touched.firstName && (
-//                     <small className="text-red-600 text-sm mt-1">
-//                       {formik.errors.firstName}
-//                     </small>
-//                   )}
-//                 </div>
-//                 <div className="flex flex-col gap-2">
-//                   <label htmlFor="lastName">Last Name</label>
-//                   <input
-//                     type="text"
-//                     className={` ${
-//                       formik.errors.lastName && formik.touched.lastName
-//                         ? "border-red-600 border-solid border-1 p-2 w-80"
-//                         : "border-1 border-solid border-gray-400 p-2 w-80"
-//                     }`}
-//                     name="lastName"
-//                     value={formik.values.lastName}
-//                     onChange={formik.handleChange}
-//                   />
-//                   {formik.errors.lastName &&
-//                     formik.touched.lastName &&
-//                     (
-//                       <small className="text-red-600 text-sm mt-1">
-//                         {formik.errors.lastName}
-//                       </small>
-//                     )}
-//                 </div>
-//               </div>
-//               <div className="flex justify-between items-center p-5">
-//                 <div className="flex flex-col gap-2">
-//                   <label htmlFor="email">Email</label>
-//                   <input
-//                     type="Email"
-//                     className={` ${
-//                       formik.errors.email && formik.touched.email
-//                         ? "border-red-600 border-solid border-1 p-2 w-80"
-//                         : "border-1 border-solid border-gray-400 p-2 w-80"
-//                     }`}
-//                     name="email"
-//                     value={formik.values.email}
-//                     onChange={formik.handleChange}
-//                   />
-//                   {formik.errors.email && formik.touched.email && (
-//                      <small className="text-red-600 text-sm mt-1">
-//                         {formik.errors.email}
-//                       </small>
-//                   )}
-//                 </div>
-//                 <div className="flex flex-col gap-2">
-//                   <label htmlFor="phoneNumber">Phone Number</label>
-//                   <input
-//                     type="text"
-//                     className={` ${
-//                       formik.errors.phoneNumber && formik.touched.phoneNumber
-//                         ? "border-red-600 border-solid border-1 p-2 w-80"
-//                         : "border-1 border-solid border-gray-400 p-2 w-80"
-//                     }`}
-//                     name="phoneNumber"
-//                     value={formik.values.phoneNumber}
-//                     onChange={formik.handleChange}
-//                   />
-//                   {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-//                      <small className="text-red-600 text-sm mt-1">
-//                         {formik.errors.phoneNumber}
-//                       </small>
-//                   )}
-//                 </div>
-//               </div>
+  return (
+    <div className="p-5 ">
+      <form className="h-auto" onSubmit={formik.handleSubmit}>
+        <section className="rounded-lg shadow-md p-5 bg-white mb-10">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-semibold mt-2">Password</h1>
+            <button
+              className="flex items-center mt-2 bg-[#5046e5] text-white font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer"
+              type="submit"
+            >
+              Update Password
+            </button>
+          </div>
 
-//               <div className="flex flex-col gap-2 p-5">
-//                 <label htmlFor="jobTitle">Job Title</label>
-//                 <input
-//                   type="text"
-//                   className={` ${
-//                     formik.errors.jobTitle && formik.touched.jobTitle
-//                       ? "border-red-600 border-solid border-1 p-2 w-80"
-//                       : "border-1 border-solid border-gray-400 p-2 w-80"
-//                   }`}
-//                   name="jobTitle"
-//                   value={formik.values.jobTitle}
-//                   onChange={formik.handleChange}
-//                 />
-//                 {formik.errors.jobTitle && formik.touched.jobTitle && (
-//                      <small className="text-red-600 text-sm mt-1">
-//                         {formik.errors.jobTitle}
-//                       </small>
-//                   )}
-//               </div>
-//             </div>
-//           </div>
+          <hr className="text-gray-500 my-10 w-full " />
+          <div className="flex flex-col gap-8 ">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="currentPassword">Current Password</label>
+              <div className="relative">
+                <input
+                  type={show3 ? "password" : "text"}
+                  className={` ${
+                    formik.errors.currentPassword &&
+                    formik.touched.currentPassword
+                      ? "border-red-600 border-solid border-1 p-2 w-80"
+                      : "border-1 border-solid border-gray-400 p-2 w-80"
+                  }`}
+                  name="currentPassword"
+                  value={formik.values.currentPassword}
+                  onChange={formik.handleChange}
+                />
+                {formik.values.currentPassword && (
+                  <small onClick={handlClick3}>
+                    {show3 ? (
+                      <img
+                        src="/images/showPassword.svg"
+                        className="  hover: cursor-pointer absolute top-2 left-70"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src="/images/hidePassword.svg"
+                        className=" hover: cursor-pointer absolute top-2 left-70"
+                        alt=""
+                      />
+                    )}
+                  </small>
+                )}
 
-//           <hr className="text-gray-500 my-5 w-full " />
-//           <div>
-//             <div className="flex flex-col gap-2 p-5">
-//               <label htmlFor="bio">Bio</label>
-//               <textarea
-//                 className={` ${
-//                   formik.errors.bio && formik.touched.bio
-//                     ? "border-red-600 border-solid border-1 p-2"
-//                     : "border-1 border-solid border-gray-400 p-2"
-//                 }`}
-//                 name="bio"
-//                 value={formik.values.bio}
-//                 onChange={formik.handleChange}
-//               />
-//               {formik.errors.bio && formik.touched.bio && (
-//                      <small className="text-red-600 text-sm mt-1">
-//                         {formik.errors.bio}
-//                       </small>
-//                   )}
-//             </div>
-//           </div>
-//         </section>
-//       </form>
-//     </div>
-//   );
-// };
+                {formik.errors.currentPassword &&
+                  formik.touched.currentPassword && (
+                    <small className="text-red-600 text-sm mt-1">
+                      {formik.errors.currentPassword}
+                    </small>
+                  )}
+              </div>
+            </div>
 
-// export default PasswordChange;
+            <div className="flex flex-col gap-2 relative">
+              <label htmlFor="newPassword">New Password</label>
+              <div className="relative">
+                <input
+                  type={show ? "text" : "password"}
+                  className={` ${
+                    formik.errors.newPassword && formik.touched.newPassword
+                      ? "border-red-600 border-solid border-1 p-2 w-80"
+                      : "border-1 border-solid border-gray-400 p-2 w-80"
+                  }`}
+                  name="newPassword"
+                  value={formik.values.newPassword}
+                  onChange={formik.handleChange}
+                />
+                {formik.values.newPassword && (
+                  <small
+                    onClick={handlClick}
+                    className=" hover: cursor-pointer"
+                  >
+                    {show ? (
+                      <img
+                        src="/images/hidePassword.svg"
+                        className="w-6 h-6 absolute top-2 left-70"
+                      />
+                    ) : (
+                      <img
+                        src="/images/showPassword.svg"
+                        className="w-6 h-6 absolute top-2 left-70 "
+                      />
+                    )}
+                  </small>
+                )}
+              </div>
+
+              {formik.errors.newPassword && formik.touched.newPassword && (
+                <small className="text-red-600 text-sm mt-1">
+                  {formik.errors.newPassword}
+                </small>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="relative">
+                <input
+                  type={show2 ? "text" : "password"}
+                  className={` ${
+                    formik.errors.confirmPassword &&
+                    formik.touched.confirmPassword
+                      ? "border-red-600 border-solid border-1 p-2 w-80"
+                      : "border-1 border-solid border-gray-400 p-2 w-80"
+                  }`}
+                  name="confirmPassword"
+                  value={formik.values.confirmPassword}
+                  onChange={formik.handleChange}
+                />
+                {formik.values.confirmPassword && (
+                  <small
+                    onClick={handlClick2}
+                    className=" hover: cursor-pointer"
+                  >
+                    {show2 ? (
+                      <img
+                        src="/images/hidePassword.svg"
+                        className="w-6 h-6 absolute top-2 left-70"
+                      />
+                    ) : (
+                      <img
+                        src="/images/showPassword.svg"
+                        className="w-6 h-6 absolute top-2 left-70 "
+                      />
+                    )}
+                  </small>
+                )}
+              </div>
+
+              {formik.errors.confirmPassword &&
+                formik.touched.confirmPassword && (
+                  <small className="text-red-600 text-sm mt-1">
+                    {formik.errors.confirmPassword}
+                  </small>
+                )}
+            </div>
+          </div>
+        </section>
+      </form>
+    </div>
+  );
+};
+
+export default PasswordChange;

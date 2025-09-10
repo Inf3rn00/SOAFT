@@ -19,7 +19,7 @@ const ProfileInfo = () => {
   };
 
   const formik = useFormik({
-    initialValues: {
+    initialValues: { 
       firstName: "",
       lastName: "",
       email: "",
@@ -35,13 +35,13 @@ const ProfileInfo = () => {
   console.log(formik.errors);
 
   return (
-    <div className="p-5 min-h-screen overflow-y-auto">
+    <div className="p-5  overflow-y-auto">
       <form className="h-auto" onSubmit={formik.handleSubmit}>
         <section className="rounded-lg shadow-md p-5 bg-white mb-10">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-semibold ">Profile Information</h1>
+            <h1 className="text-2xl font-semibold mt-2 ">Profile Information</h1>
             <button
-              className="flex items-center bg-[#5046e5] text-white font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer"
+              className="flex items-center bg-[#5046e5] mt-2 text-white font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer"
               type="submit"
             >
               Save Changes
