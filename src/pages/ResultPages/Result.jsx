@@ -13,7 +13,7 @@ const Result = () => {
   const [course, setCourse] = useState("");
   const [status, setStatus] = useState("");
 
-  //Function fpr clearing all inputs from the forms
+  //Function f0r clearing all inputs from the forms
   const clearAll = () => {
     setMinScore("");
     setMaxScore("");

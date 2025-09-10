@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link , useLocation } from 'react-router-dom';
 import logo from "/Icons/landing page icons/LOGO.png";
 import dashboardIcon from "/Icons/Admin page icons/sidebar/DahboardIcon.svg";
 import AssesmentIcon from "/Icons/Admin page icons/sidebar/AssessmentIcon.svg";
@@ -8,6 +8,7 @@ import questionBank from "/Icons/Admin page icons/sidebar/questionBank.svg";
 import settingsIcon from "/Icons/Admin page icons/sidebar/settingsIcon.svg";
 
 const AdminSidebar = () => {
+    const location = useLocation();
     const sidebarItems = [
         { label: "Dashboard", icon: dashboardIcon, link: "/admin/" }, // ✅ Fixed: removed {}
         { label: "Assessment", icon: AssesmentIcon, link: "/admin/assessment" }, // ✅ Fixed: removed {}
@@ -28,9 +29,9 @@ const AdminSidebar = () => {
                 </div>
                 {/* Sidebar Items */}
                 <div className='font-semibold text-[16px] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto'>
-                {sidebarItems.map((item) => (
+                {sidebarItems.map((item, index) => (
                     // Each sidebar item as a link
-                        <Link to={item.link} className='px-2 hover:bg-[#f4f4f7] rounded-4xl w-[90%] h-[50px] flex items-center' key={item.label}>
+                        <Link to={item.link} className={`px-2 hover:bg-[#f4f4f7] rounded-2xl w-[90%] h-[50px] flex items-center ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
                             <div className='flex items-center'>
                             {/* ✅ Fixed: Now properly rendering the imported icons */}
                             <img src={item.icon} alt={item.label} className="w-5 h-5 mr-2" />

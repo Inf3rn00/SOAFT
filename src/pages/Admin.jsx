@@ -10,6 +10,7 @@ import AdminDashboard from "./AdminDashboard";
 import AdvancedResultStats from "./ResultPages/AdvancedResultStats";
 
 const Admin = () => {
+
   return (
     <div className="flex flex-row w-full">
       <div className="fixed w-[19%]">
