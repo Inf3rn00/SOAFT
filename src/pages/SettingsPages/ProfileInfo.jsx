@@ -15,10 +15,7 @@ const ProfileInfo = () => {
       `Form submitted by ${formik.values.jobTitle} ${formik.values.firstName} `
     );
 
-    
-
-    formik.resetForm()
-     
+    formik.resetForm();
   };
 
   const formik = useFormik({
@@ -95,13 +92,11 @@ const ProfileInfo = () => {
                     value={formik.values.lastName}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.lastName &&
-                    formik.touched.lastName &&
-                    (
-                      <small className="text-red-600 text-sm mt-1">
-                        {formik.errors.lastName}
-                      </small>
-                    )}
+                  {formik.errors.lastName && formik.touched.lastName && (
+                    <small className="text-red-600 text-sm mt-1">
+                      {formik.errors.lastName}
+                    </small>
+                  )}
                 </div>
               </div>
               <div className="flex justify-between items-center p-5">
@@ -119,9 +114,9 @@ const ProfileInfo = () => {
                     onChange={formik.handleChange}
                   />
                   {formik.errors.email && formik.touched.email && (
-                     <small className="text-red-600 text-sm mt-1">
-                        {formik.errors.email}
-                      </small>
+                    <small className="text-red-600 text-sm mt-1">
+                      {formik.errors.email}
+                    </small>
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
@@ -138,9 +133,9 @@ const ProfileInfo = () => {
                     onChange={formik.handleChange}
                   />
                   {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-                     <small className="text-red-600 text-sm mt-1">
-                        {formik.errors.phoneNumber}
-                      </small>
+                    <small className="text-red-600 text-sm mt-1">
+                      {formik.errors.phoneNumber}
+                    </small>
                   )}
                 </div>
               </div>
@@ -159,10 +154,10 @@ const ProfileInfo = () => {
                   onChange={formik.handleChange}
                 />
                 {formik.errors.jobTitle && formik.touched.jobTitle && (
-                     <small className="text-red-600 text-sm mt-1">
-                        {formik.errors.jobTitle}
-                      </small>
-                  )}
+                  <small className="text-red-600 text-sm mt-1">
+                    {formik.errors.jobTitle}
+                  </small>
+                )}
               </div>
             </div>
           </div>
@@ -182,10 +177,10 @@ const ProfileInfo = () => {
                 onChange={formik.handleChange}
               />
               {formik.errors.bio && formik.touched.bio && (
-                     <small className="text-red-600 text-sm mt-1">
-                        {formik.errors.bio}
-                      </small>
-                  )}
+                <small className="text-red-600 text-sm mt-1">
+                  {formik.errors.bio}
+                </small>
+              )}
             </div>
           </div>
         </section>
