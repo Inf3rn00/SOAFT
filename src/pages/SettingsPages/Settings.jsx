@@ -1,3 +1,4 @@
+import PasswordChange from "./PasswordChange";
 import ProfileInfo from "./ProfileInfo";
 
 const Settings = () => {
@@ -13,6 +14,7 @@ const Settings = () => {
         </div>
       </section>
       <ProfileInfo />
+      <PasswordChange/>
     </div>
   );
 };
