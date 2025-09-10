@@ -14,6 +14,11 @@ const ProfileInfo = () => {
     alert(
       `Form submitted by ${formik.values.jobTitle} ${formik.values.firstName} `
     );
+
+    
+
+    formik.resetForm()
+     
   };
 
   const formik = useFormik({
