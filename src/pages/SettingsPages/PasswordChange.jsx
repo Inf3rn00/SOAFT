@@ -30,7 +30,7 @@ const PasswordChange = () => {
 
   const formik = useFormik({
     initialValues: {
-      currentPassword: "12345678",
+      currentPassword: "123456789",
       newPassword: "",
       confirmPassword: "",
     },
@@ -40,6 +40,8 @@ const PasswordChange = () => {
   });
 
   console.log(formik.errors);
+
+  
 
   return (
     <div className="p-5 ">

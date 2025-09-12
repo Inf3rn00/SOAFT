@@ -1,5 +1,7 @@
 import PasswordChange from "./PasswordChange";
 import ProfileInfo from "./ProfileInfo";
+import Preferences from "./Preferences";
+import SecuritySettings from "./SecuritySettings";
 
 const Settings = () => {
   return (
@@ -15,6 +17,8 @@ const Settings = () => {
       </section>
       <ProfileInfo />
       <PasswordChange/>
+      <Preferences />
+      <SecuritySettings/>
     </div>
   );
 };
