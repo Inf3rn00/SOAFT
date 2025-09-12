@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 //component decelaration
 const Result = () => {
-  const [minScore, setMinScore] = useState("");
+  const [minScore, setMinScore] = useState("1234567");
   const [maxScore, setMaxScore] = useState("");
   const [dateRange, setDateRange] = useState("");
   const [course, setCourse] = useState("");
