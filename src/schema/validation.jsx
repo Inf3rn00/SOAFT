@@ -26,7 +26,7 @@ export const passwordSchema = yup.object().shape({
     .string()
     .matches(
       passwordRules,
-      "Must contain 8+ chars, 1 uppercase, 1 number, 1 special character"
+      "Must contain 8+ characters, 1 uppercase, 1 number, 1 special character"
     )
     .required("Password is required"),
     
