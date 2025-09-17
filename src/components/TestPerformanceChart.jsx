@@ -22,9 +22,9 @@ const data = [
 const TestPerformanceChart = () => {
     return (
         <div className="bg-white rounded-[16px] shadow-md p-5 ">
-        <div style={{ width: "100%", height: '445px' }}>
+        <div style={{ width: "100%", height: '440px'}}>
             <h2 style={{ marginBottom: "10px" }} className="text-[22px] font-semibold">Test performance</h2>
-            <ResponsiveContainer>
+            <ResponsiveContainer >
                 <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
