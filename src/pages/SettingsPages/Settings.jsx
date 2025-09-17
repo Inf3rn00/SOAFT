@@ -5,11 +5,11 @@ import SecuritySettings from "./SecuritySettings";
 
 const Settings = () => {
   return (
-    <div className="bg-background-offwhite w-full  ">
+    <div className="bg-background-offwhite w-full  relative z-[-1]">
       <section className="p-5 flex justify-between items-center w-full">
         <div>
           <h1 className="text-[32px] font-semibold">Settings</h1>
-          <p className="text-[#6c757d] mt-2">
+          <p className="text-[rgb(108,117,125)] mt-2">
             Configure your application preferences, account settings, and
             integrations
           </p>

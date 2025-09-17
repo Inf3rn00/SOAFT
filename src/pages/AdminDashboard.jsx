@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="bg-[#f0f1f2] w-full">
+    <div className="bg-[#f0f1f2] w-full relative z-[-1]">
       <div className="p-5 flex justify-between items-center">
         <div>
           <h1 className="text-[32px] font-semibold cursor-pointer">Dashboard</h1>
