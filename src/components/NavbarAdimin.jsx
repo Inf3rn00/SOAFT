@@ -15,7 +15,7 @@ const NavbarAdimin = () => {
                         <FaSearch size={20}/>
                     </div>
                     {/* Search Input */}
-                    <input type="text" placeholder= " Search for test, student, or question" className="border bg-[#f0f1f2] border-[#f0f1f2] p-2 w-[90%] h-full rounded-r-full" />
+                    <input type="text" placeholder= " Search for test, student, or question" className="focus-within: bg-[#f0f1f2] border-[#f0f1f2] p-2 w-[90%] h-full rounded-r-full "  />
                 </div>
                 {/* Notification and Profile */}
                 <div className='flex items-center justify-between gap-2'>
