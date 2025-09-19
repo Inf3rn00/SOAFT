@@ -1,4 +1,3 @@
-import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import deleteBtn from "/Icons/Question Bank Icons/deleteBtn.svg";
@@ -10,6 +9,7 @@ const QuestionBank = () => {
   const [question, setquestion] = useState("");
   const [sort, setSort] = useState("Recent");
   const [checked, setChecked] = useState(false);
+  
 
   const questionData = [
     {
@@ -86,12 +86,12 @@ const QuestionBank = () => {
   };
 
   const questionTypeColour = (question) => {
-  if (question === "Multiple Choice") return "bg-[#EAE9FC] text-[#5046E5]";
-  if (question === "Essay") return "bg-[#E9F2FB] text-[#4A90E2]";
-  if (question === "Short Answer") return "bg-[#F3ECF8] text-[#8743BE]";
-  if (question === "Matching") return "bg-[#FCF7E9] text-[#E5BE46]";
-  return "";
-};
+    if (question === "Multiple Choice") return "bg-[#EAE9FC] text-[#5046E5]";
+    if (question === "Essay") return "bg-[#E9F2FB] text-[#4A90E2]";
+    if (question === "Short Answer") return "bg-[#F3ECF8] text-[#8743BE]";
+    if (question === "Matching") return "bg-[#FCF7E9] text-[#E5BE46]";
+    return "";
+  };
 
   return (
     <div className="bg-background-offwhite w-full  relative">
@@ -181,7 +181,7 @@ const QuestionBank = () => {
             ) : null}
           </div>
 
-          <div className="w-1/5 ml-auto">
+          <div className="w-1/5 ml-auto flex flex-col gap-5">
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Sort:</InputLabel>
               <Select
@@ -197,6 +197,18 @@ const QuestionBank = () => {
                 <MenuItem value={"Z-A"}>Z-A</MenuItem>
               </Select>
             </FormControl>
+
+            {sort && (
+              <div className="bg-background-offwhite p-4 font-medium text-xs rounded-[30px] flex justify-between ">
+                <p>Sort: {sort}</p>
+                <img
+                  src={deleteBtn}
+                  alt="Delete button"
+                  onClick={() => setSort("")}
+                  className="cursor-pointer"
+                />
+              </div>
+            )}  
           </div>
         </div>
       </section>
@@ -267,7 +279,15 @@ const QuestionBank = () => {
                     </div>
                   </td>
                   <td className="px-5">{item.subject}</td>
-                  <td  ><div className={`${questionTypeColour(item.type)} py-3 px-3 rounded-[30px] text-center`}>{item.type}</div></td>
+                  <td>
+                    <div
+                      className={`${questionTypeColour(
+                        item.type
+                      )} py-3 px-3 rounded-[30px] text-center`}
+                    >
+                      {item.type}
+                    </div>
+                  </td>
                   <td className="px-5">{item.lastUsage}</td>
                   <td className="px-5">
                     <div className="flex gap-4 text-gray-600 ">
