@@ -1,53 +1,218 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import deleteBtn from "/Icons/Question Bank Icons/deleteBtn.svg";
+import copyIcon from "/Icons/Question Bank Icons/copyicon.svg";
+import downloadIcon from "/Icons/Question Bank Icons/downloadIcon.svg";
+import editIcon from "/Icons/Question Bank Icons/editIcon.svg";
+import trashIcon from "/Icons/Question Bank Icons/trashIcon.svg";
 import { FaDownload, FaEdit, FaTrash, FaCopy } from "react-icons/fa";
 import Checkbox from "@mui/material/Checkbox";
 
 const QuestionBank = () => {
   const [subject, setSubject] = useState("");
   const [question, setquestion] = useState("");
-  const [sort, setSort] = useState("Recent");
+  const [sort, setSort] = useState("");
   const [checked, setChecked] = useState(false);
-  
+  const [questionData, setquestionData] = useState([
+  {
+    id: 1,
+    question: "Calculate the standard deviation of the following data set: 12, 15, 18, 22, 30, 35, 40.",
+    subject: "Statistics",
+    type: "Multiple Choice",
+    lastUsage: "2023-10-01",
+    Actions: "Click me",
+  },
+  {
+    id: 2,
+    question: "What is the derivative of the function f(x) = 3x^2 + 5x - 7?",
+    subject: "Mathematics",
+    type: "Short Answer",
+    lastUsage: "2023-09-25",
+    Actions: "Click me",
+  },
+  {
+    id: 3,
+    question: "Explain the process of photosynthesis in plants and its significance.",
+    subject: "Biology",
+    type: "Essay",
+    lastUsage: "2023-09-20",
+    Actions: "Click me",
+  },
+  {
+    id: 4,
+    question: "What are the main components of a CPU and their functions?",
+    subject: "Computer Science",
+    type: "Matching",
+    lastUsage: "2023-09-15",
+    Actions: "Click me",
+  },
+  {
+    id: 5,
+    question: "Solve the quadratic equation: x² - 5x + 6 = 0",
+    subject: "Mathematics",
+    type: "Multiple Choice",
+    lastUsage: "2023-09-10",
+    Actions: "Click me",
+  },
+  {
+    id: 6,
+    question: "Describe the structure and function of DNA molecules.",
+    subject: "Biology",
+    type: "Essay",
+    lastUsage: "2023-09-05",
+    Actions: "Click me",
+  },
+  {
+    id: 7,
+    question: "What is the time complexity of binary search algorithm?",
+    subject: "Computer Science",
+    type: "Short Answer",
+    lastUsage: "2023-08-30",
+    Actions: "Click me",
+  },
+  {
+    id: 8,
+    question: "Calculate the probability of drawing a heart from a standard deck of cards.",
+    subject: "Statistics",
+    type: "Multiple Choice",
+    lastUsage: "2023-08-25",
+    Actions: "Click me",
+  },
+  {
+    id: 9,
+    question: "Differentiate between mitosis and meiosis.",
+    subject: "Biology",
+    type: "Matching",
+    lastUsage: "2023-08-20",
+    Actions: "Click me",
+  },
+  {
+    id: 10,
+    question: "Implement a bubble sort algorithm in pseudocode.",
+    subject: "Computer Science",
+    type: "Essay",
+    lastUsage: "2023-08-15",
+    Actions: "Click me",
+  },
+  {
+    id: 11,
+    question: "Find the integral of ∫(2x + 3) dx",
+    subject: "Mathematics",
+    type: "Short Answer",
+    lastUsage: "2023-08-10",
+    Actions: "Click me",
+  },
+  {
+    id: 12,
+    question: "What is the normal distribution and its properties?",
+    subject: "Statistics",
+    type: "Essay",
+    lastUsage: "2023-08-05",
+    Actions: "Click me",
+  },
+  {
+    id: 13,
+    question: "Explain the concept of object-oriented programming.",
+    subject: "Computer Science",
+    type: "Multiple Choice",
+    lastUsage: "2023-07-30",
+    Actions: "Click me",
+  },
+  {
+    id: 14,
+    question: "Solve the system of equations: 2x + y = 5, x - y = 1",
+    subject: "Mathematics",
+    type: "Short Answer",
+    lastUsage: "2023-07-25",
+    Actions: "Click me",
+  },
+  {
+    id: 15,
+    question: "Describe the human circulatory system.",
+    subject: "Biology",
+    type: "Essay",
+    lastUsage: "2023-07-20",
+    Actions: "Click me",
+  },
+  {
+    id: 16,
+    question: "Calculate the correlation coefficient for the given data set.",
+    subject: "Statistics",
+    type: "Multiple Choice",
+    lastUsage: "2023-07-15",
+    Actions: "Click me",
+  },
+  {
+    id: 17,
+    question: "What is a linked list and how does it work?",
+    subject: "Computer Science",
+    type: "Matching",
+    lastUsage: "2023-07-10",
+    Actions: "Click me",
+  },
+  {
+    id: 18,
+    question: "Find the limit of (x² - 4)/(x - 2) as x approaches 2",
+    subject: "Mathematics",
+    type: "Short Answer",
+    lastUsage: "2023-07-05",
+    Actions: "Click me",
+  },
+  {
+    id: 19,
+    question: "Explain the process of cellular respiration.",
+    subject: "Biology",
+    type: "Essay",
+    lastUsage: "2023-06-30",
+    Actions: "Click me",
+  },
+  {
+    id: 20,
+    question: "What is hypothesis testing and its steps?",
+    subject: "Statistics",
+    type: "Multiple Choice",
+    lastUsage: "2023-06-25",
+    Actions: "Click me",
+  },
+  {
+    id: 21,
+    question: "Describe the TCP/IP model layers.",
+    subject: "Computer Science",
+    type: "Matching",
+    lastUsage: "2023-06-20",
+    Actions: "Click me",
+  },
+  {
+    id: 22,
+    question: "Calculate the area under the curve y = x² from x = 0 to x = 3",
+    subject: "Mathematics",
+    type: "Short Answer",
+    lastUsage: "2023-06-15",
+    Actions: "Click me",
+  },
+  {
+    id: 23,
+    question: "What are enzymes and how do they function?",
+    subject: "Biology",
+    type: "Multiple Choice",
+    lastUsage: "2023-06-10",
+    Actions: "Click me",
+  },
+  {
+    id: 24,
+    question: "Explain the central limit theorem and its importance.",
+    subject: "Statistics",
+    type: "Essay",
+    lastUsage: "2023-06-05",
+    Actions: "Click me",
+  }
+]);
 
-  const questionData = [
-    {
-      id: 1,
-      question:
-        "Calculate the standard deviation of the following data set: 12, 15, 18, 22, 30, 35, 40.",
-      subject: "Statistics",
-      type: "Multiple Choice",
-      lastUsage: "2023-10-01",
-      Actions: "Click me",
-    },
-    {
-      id: 2,
-      question: "What is the derivative of the function f(x) = 3x^2 + 5x - 7?",
-      subject: "Mathematics",
-      type: "Short Answer",
-      lastUsage: "2023-09-25",
-      Actions: "Click me",
-    },
-    {
-      id: 3,
-      question:
-        "Explain the process of photosynthesis in plants and its significance.",
-      subject: "Biology",
-      type: "Essay",
-      lastUsage: "2023-09-20",
-      Actions: "Click me",
-    },
-    {
-      id: 4,
-      question:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      subject: "Computer",
-      type: "Matching",
-      lastUsage: "2023-09-15",
-      Actions: "Click me",
-    },
-  ];
+  const deleteElement = (id) => {
+    console.log(questionData);
+
+    setquestionData(questionData.filter((item) => item.id !== id));
+  };
 
   const handleChange = (event) => {
     setSubject(event.target.value);
@@ -208,7 +373,7 @@ const QuestionBank = () => {
                   className="cursor-pointer"
                 />
               </div>
-            )}  
+            )}
           </div>
         </div>
       </section>
@@ -234,11 +399,21 @@ const QuestionBank = () => {
               Select All
             </div>
             <div className="flex gap-10">
-              <p className="flex gap-3 items-center cursor-pointer">
-                <FaDownload size={20}></FaDownload> Export
+              <p className="flex gap-3 items-center cursor-pointer ">
+                <img
+                  src={downloadIcon}
+                  alt="Export button"
+                  className="cursor-pointer  hover:scale-110"
+                />
+                Export
               </p>
               <p className="flex gap-3 items-center cursor-pointer">
-                <FaTrash size={20}></FaTrash> Delete
+                <img
+                  src={trashIcon}
+                  alt="Delete button"
+                  className="cursor-pointer  hover:scale-110"
+                />{" "}
+                Delete
               </p>
             </div>
           </header>
@@ -291,22 +466,28 @@ const QuestionBank = () => {
                   <td className="px-5">{item.lastUsage}</td>
                   <td className="px-5">
                     <div className="flex gap-4 text-gray-600 ">
-                      <FaEdit
+                      <img
+                        src={copyIcon}
+                        alt="Copy to clipboard"
                         className="cursor-pointer  hover:scale-110"
-                        size={18}
-                      />
-                      <FaCopy
-                        className="cursor-pointer  hover:scale-110"
-                        size={18}
                         onClick={() => copyToClipboard(item.question)}
                       />
-                      <FaTrash
+                      <img
+                        src={editIcon}
+                        alt="Edit button"
                         className="cursor-pointer  hover:scale-110"
-                        size={18}
+                      />
+                      <img
+                        src={trashIcon}
+                        alt="download button"
+                        className="cursor-pointer  hover:scale-110"
+                        onClick={() => {
+                          confirm("Do you want to delete this item?") ? deleteElement(item.id): null;
+                        }}
                       />
                     </div>
                   </td>
-                </tr>
+                </tr> 
               ))}
             </tbody>
           </table>
