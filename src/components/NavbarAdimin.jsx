@@ -5,8 +5,8 @@ import { IoIosNotificationsOutline } from 'react-icons/io';
 const NavbarAdimin = () => {
     return (
         // Navbar for Admin
-        <div className='w-full h-17 bg-[#ffffff] flex flex-row items-center justify-between border-b border-[#f0f1f2]'>
-            <div className='flex items-center justify-between w-full h-full mx-5'>
+        <div className='w-full h-17 bg-white flex flex-row items-center justify-between border-b border-[#f0f1f2]'>
+            <div className='flex items-center justify-between w-full mx-5'>
                 {/* Search Bar */}
                 <div className='flex items-center border border-[#f0f1f2] rounded-full text-[#a7acb1] w-[550px] h-[50px]'>
                     

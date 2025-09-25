@@ -13,3 +13,15 @@
   --font-Sonsie-One: Sonsie One, sans-serif;
   --font-Monteserrat: Montserrat, sans-serif;
 }
+
+/* Target only the floating elements */
+.MuiPopover-root,
+.MuiModal-root,
+.MuiSelect-root .MuiPopover-paper,
+.MuiAutocomplete-popper {
+  z-index: 40 !important;
+}
+
+.recharts-tooltip-wrapper {
+  z-index: 40 !important;
+}

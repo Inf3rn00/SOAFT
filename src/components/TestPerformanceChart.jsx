@@ -27,9 +27,10 @@ const TestPerformanceChart = () => {
             <ResponsiveContainer >
                 <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
+                    
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip  />
                     <Legend />
                     <Bar dataKey="value" radius={[100, 100, 0, 0]} />
                 </BarChart>

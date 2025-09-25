@@ -10,11 +10,11 @@ import settingsIcon from "/Icons/Admin page icons/sidebar/settingsIcon.svg";
 const AdminSidebar = () => {
     const location = useLocation();
     const sidebarItems = [
-        { label: "Dashboard", icon: dashboardIcon, link: "/admin/" }, // ✅ Fixed: removed {}
-        { label: "Assessment", icon: AssesmentIcon, link: "/admin/assessment" }, // ✅ Fixed: removed {}
-        { label: "Result", icon: ResultIcon, link: "/admin/result" }, // ✅ Fixed: removed {}
-        { label: "Question Bank", icon: questionBank, link: "/admin/question-bank" }, // ✅ Fixed: removed {}
-        { label: "Settings", icon: settingsIcon, link: "/admin/settings" }, // ✅ Fixed: removed {}
+        { label: "Dashboard", icon: dashboardIcon, link: "/admin/" }, 
+        { label: "Assessment", icon: AssesmentIcon, link: "/admin/assessment" }, 
+        { label: "Result", icon: ResultIcon, link: "/admin/result" }, 
+        { label: "Question Bank", icon: questionBank, link: "/admin/question-bank" }, 
+        { label: "Settings", icon: settingsIcon, link: "/admin/settings" }, 
     ];
 
     return (
@@ -28,14 +28,13 @@ const AdminSidebar = () => {
                     </div>
                 </div>
                 {/* Sidebar Items */}
-                <div className='font-semibold text-[16px] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto gap-1'>
-                {sidebarItems.map((item, index) => (
+                <div className='font-semibold text-[16px] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto gap-1 ${}'>
+                {sidebarItems.map((item) => (
                     // Each sidebar item as a link
-                        <Link to={item.link} className={`px-2 hover:bg-[#E6E6FA] rounded-2xl w-[90%] h-[50px] flex items-center ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
-                            <div className='flex items-center'>
-                            {/* ✅ Fixed: Now properly rendering the imported icons */}
+                        <Link to={item.link} className={`px-2 hover:bg-[#E6E6FA] rounded-2xl w-[90%] h-[50px] flex items-center hover:text-[#5046E5] ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
+                            <div className='flex items-center '>
                             <img src={item.icon} alt={item.label} className="w-5 h-5 mr-2" />
-                            <span className='ml-2' >{item.label}</span>
+                            <span className='ml-2 ' >{item.label}</span>
                             </div>
                         </Link>
                 ))}

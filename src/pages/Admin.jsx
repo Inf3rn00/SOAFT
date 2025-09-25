@@ -10,24 +10,29 @@ import AdminDashboard from "./AdminDashboard";
 import AdvancedResultStats from "./ResultPages/AdvancedResultStats";
 
 const Admin = () => {
-
   return (
-    <div className="flex flex-row w-full">
-      <div className="fixed w-[19%]">
+    <div className=" flex flex-row w-full h-screen">
+      <div className="fixed w-[19%] h-full z-40">
         <AdminSidebar />
       </div>
-      <div className="fixed w-[80%] ml-[19%] bg-white">
-        <NavbarAdimin />
-      </div>
-      <div className="ml-[19%] mt-17 w-full flex justify-center items-center">
-        <Routes>
-          <Route index element={<AdminDashboard />} />
-          <Route path="assessment" element={<Assessment />} />
-          <Route path="result" element={<Result />} />
-          <Route path="result/advancedStat/:id" element={<AdvancedResultStats />} />
-          <Route path="question-bank" element={<QuestionBank />} />
-          <Route path="settings" element={<Settings />} />
-        </Routes>
+
+      <div className="ml-[19%] w-[81%] flex flex-col h-screen">
+        <div className="fixed top-0 left-[19%] w-[81%] z-50 bg-white">
+          <NavbarAdimin />
+        </div>
+        <div className="flex-1 overflow-y-auto pt-[68px]">
+          <Routes>
+            <Route index element={<AdminDashboard />} />
+            <Route path="assessment" element={<Assessment />} />
+            <Route path="result" element={<Result />} />
+            <Route
+              path="result/advancedStat/:id"
+              element={<AdvancedResultStats />}
+            />
+            <Route path="question-bank" element={<QuestionBank />} />
+            <Route path="settings" element={<Settings />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

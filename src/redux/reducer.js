@@ -73,7 +73,7 @@ const initialState = {
       submitted: "2025-08-27T16:40:00",
       "time-spent": "2 hours, 30 minutes",
       "School-grade": "Top 50%",
-      image: "/images/Heroface5.jpg",
+      image: "/images/Student2Image.jpg",
       textContent: "Advanced Statistics Midterm Examination",
       flags: "Late Submission",
       similarity: "12% Similarity",
@@ -82,6 +82,7 @@ const initialState = {
       integrityCheck: 1,
       plagiarismScore: 5,
     },
+    
   ],
   admin: [],
 };
