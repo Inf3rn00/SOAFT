@@ -259,7 +259,7 @@ const QuestionBank = () => {
   };
 
   return (
-    <div className="bg-background-offwhite w-full  relative">
+    <div className="bg-background-offwhite w-full overflow-hidden  ">
       <section className="p-5 flex justify-between items-center w-full">
         <div>
           <h1 className="text-[32px] font-semibold">Question Bank</h1>

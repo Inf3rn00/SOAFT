@@ -5,7 +5,7 @@ import SecuritySettings from "./SecuritySettings";
 
 const Settings = () => {
   return (
-    <div className="bg-background-offwhite w-full  relative z-[-1]">
+    <div className="bg-background-offwhite w-full  relative ">
       <section className="p-5 flex justify-between items-center w-full">
         <div>
           <h1 className="text-[32px] font-semibold">Settings</h1>
