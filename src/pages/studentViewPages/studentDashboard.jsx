@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { date } from "yup";
 
 const StudentDashboard = () => {
@@ -9,6 +10,7 @@ const StudentDashboard = () => {
       teacher: "Prof Joseph Ayodeji",
       schedule: "Today, 10:00 AM - 11:00 AM",
       time: "90 minutes",
+      isClickable: true,
     },
     {
       header: "Weekly Quiz #5",
@@ -17,6 +19,7 @@ const StudentDashboard = () => {
       teacher: "Dr Elizabeth Lizzy",
       schedule: "June 19, 2025 2:00 PM",
       time: "45 minutes",
+      isClickable: false,
     },
     {
       header: "Project Submission",
@@ -25,6 +28,7 @@ const StudentDashboard = () => {
       teacher: "Prof Joseph Ayodeji",
       schedule: "June 25 2025 11:59 PM",
       time: "45 minutes",
+      isClickable: false,
     },
   ];
 
@@ -65,6 +69,8 @@ const StudentDashboard = () => {
     if (score >= 45) return "text-red-500 ";
     return "text-red-500 ";
   };
+
+  const [isModalOpen, setisModalOpen] = useState(false);
 
   return (
     <div className="bg-background-offwhite w-full overflow-hidden">
@@ -124,12 +130,17 @@ const StudentDashboard = () => {
             <section className="mt-5 text-center font-semibold">
               <button
                 className={` py-2 w-full rounded-lg ${
-                  test.state === "Ready"
+                  test.isClickable
                     ? "bg-background-blue text-white cursor-pointer hover:bg-blue-800"
                     : "bg-background-offwhite text-gray-400 cursor-not-allowed"
                 }`}
+                disabled={!test.isClickable}
+                onClick={() => {
+                  setisModalOpen(!isModalOpen);
+                  console.log(toggleBtn);
+                }}
               >
-                {test.state === "Ready" ? "Start Test" : "Not Available Yet"}
+                {test.isClickable ? "Start Test" : "Not Available Yet"}
               </button>
             </section>
           </div>
@@ -189,11 +200,20 @@ const StudentDashboard = () => {
           </table>
         </div>
       </section>
-
       <section className="px-10 mb-13 mt-9 flex justify-end w-full">
-      <button className=" px-10 py-2 bg-background-blue rounded-lg text-white  font-semibold cursor-pointer hover:bg-blue-800">Log Out</button>
-
+        <button className=" px-10 py-2 bg-background-blue rounded-lg text-white  font-semibold cursor-pointer hover:bg-blue-800">
+          Log Out
+        </button>
       </section>
+
+      {isModalOpen && (
+        <div className="absolute w-[200px] h-[300px] bg-red-400 top-[300px] left-[300px]">
+          <button className="bg-blue-300 text-white  px-6 py-6 mt-5 ml-3 cursor-pointer">
+            {" "}
+            click me
+          </button>
+        </div>
+      )}
     </div>
   );
 };
