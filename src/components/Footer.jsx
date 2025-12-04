@@ -19,7 +19,7 @@ const Footer = () => {
 
   return (
     <div className="h-[550px] bg-background-blue relative">
-      <img src={curvyEdge} alt="" className="w-screen  absolute top-[-140px]" />
+      <img src={curvyEdge} alt="" className="w-screen  absolute top-[-128px]" />
       <div className="absolute bg-lavendar w-[470px] h-[300px] rounded-2xl top-[-300px] left-12">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           <label htmlFor="" className="text-2xl font-bold">
