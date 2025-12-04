@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { date } from "yup";
+import TestModal from "./TestModal";
 
 const StudentDashboard = () => {
   const upcomingTests = [
@@ -137,7 +138,6 @@ const StudentDashboard = () => {
                 disabled={!test.isClickable}
                 onClick={() => {
                   setisModalOpen(!isModalOpen);
-                  console.log(toggleBtn);
                 }}
               >
                 {test.isClickable ? "Start Test" : "Not Available Yet"}
@@ -207,12 +207,7 @@ const StudentDashboard = () => {
       </section>
 
       {isModalOpen && (
-        <div className="absolute w-[200px] h-[300px] bg-red-400 top-[300px] left-[300px]">
-          <button className="bg-blue-300 text-white  px-6 py-6 mt-5 ml-3 cursor-pointer">
-            {" "}
-            click me
-          </button>
-        </div>
+       <TestModal closeModal={setisModalOpen}/>
       )}
     </div>
   );
