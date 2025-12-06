@@ -9,7 +9,7 @@ const UpcomingTest = () => {
         { id: 4, name: "Thesis Defense", course: "Computer Science", date: "July 20, 2025", time: "11:00 AM" }
     ]
   return (
-    <div className='bg-[#ffffff]  rounded-[16px] shadow-md'>
+    <section className='bg-[#ffffff]  rounded-[16px] shadow-md'>
         <div className='p-6 w-full flex flex-col'>
             <div className='flex justify-between mb-5'>
                 <h1 className='text-[22px] font-semibold my-auto'>Upcoming Test</h1>
@@ -25,12 +25,12 @@ const UpcomingTest = () => {
                         </div>
                     ))
                 }
-                <button className='flex items-center gap-x-2 p-4 border border-[#d6d6d6] text-[#6c6c7e] font-bold bg-[#e5e5e5] text-[16px] rounded-lg'>
+                <button className='flex items-center justify-center gap-x-2 p-4 border border-[#d6d6d6] text-[#6c6c7e] font-bold bg-[#e5e5e5] text-[16px] rounded-lg'>
                     <PiPlus /> Schedule New Test
                 </button>
             </div>
         </div>
-    </div>
+    </section>
   )
 }
 
