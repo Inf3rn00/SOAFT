@@ -72,7 +72,7 @@ const SecuritySettings = () => {
           </div>
         </div>
         <hr className="text-gray-500 my-10 w-full" />
-       
+      
 
 
         <div className="flex justify-between items-center ">

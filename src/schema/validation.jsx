@@ -16,7 +16,6 @@ export const basicSchema = yup.object().shape({
     .required("Please input your Phone Number"),
   jobTitle: yup.string().required("This field is required"),
   bio: yup.string().required("This field is required"),
-
 });
 
 
@@ -35,3 +34,10 @@ export const passwordSchema = yup.object().shape({
     .oneOf([yup.ref('newPassword'), null], "Passwords must match")
     .required("Password is required"),
 })
+
+
+export const signUpSchema = yup.object().shape({
+    firstName: yup.string().required("This field is required"),
+    lastName: yup.string().required("This field is required"),
+    schoolOrInstituteName: yup.string().required("This field is required")
+});

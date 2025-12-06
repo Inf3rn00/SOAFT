@@ -84,6 +84,20 @@ const initialState = {
     },
     
   ],
+  initialAssessments: [
+      { id: 1, title: "Midterm Examination", questions: 40, duration: "75 Minutes", course: "Business Management", date: "2025-06-16", time: "10:00 am - 11:30 am", status: "Completed", progress: 100, iconColor: "bg-blue-100 text-blue-600" },
+      { id: 2, title: "Final Project Submission", description: "Project upload...", course: "Software Engineering", date: "2025-06-18", time: "Due by 2:00 Pm", status: "Up Coming", progress: 0, iconColor: "bg-purple-100 text-purple-600" },
+      { id: 3, title: "Weekly Quiz #8", questions: 10, duration: "45 Minutes", course: "Organic Chemistry", date: "2025-06-14", time: "Due by 2:00 Pm", status: "In Progress", progress: 87, iconColor: "bg-green-100 text-green-600" },
+      { id: 4, title: "Final Year Examination", questions: 60, duration: "90 Minutes", course: "Computer Science", date: "2025-07-01", time: "12:00 pm - 2:30 pm", status: "Draft", progress: 0, iconColor: "bg-gray-100 text-gray-600" },
+      { id: 5, title: "First Week Assessment", questions: 40, duration: "75 Minutes", course: "English Language", date: "2025-06-10", time: "Due by 2:00 Pm", status: "Completed", progress: 100, iconColor: "bg-red-100 text-red-600" },
+      { id: 6, title: "Biology Lab Report", description: "Upload report PDF", course: "Biology", date: "2025-06-20", time: "Due by 5:00 Pm", status: "Up Coming", progress: 0, iconColor: "bg-green-100 text-green-600" },
+      { id: 7, title: "History Essay", questions: 2, duration: "120 Minutes", course: "History", date: "2025-06-15", time: "Due by 11:59 Pm", status: "Completed", progress: 100, iconColor: "bg-yellow-100 text-yellow-600" },
+      { id: 8, title: "Math Pop Quiz", questions: 5, duration: "15 Minutes", course: "Mathematics", date: "2025-06-22", time: "10:00 am - 10:15 am", status: "Draft", progress: 0, iconColor: "bg-blue-100 text-blue-600" },
+      { id: 9, title: "Physics Midterm", questions: 30, duration: "60 Minutes", course: "Physics", date: "2025-06-25", time: "9:00 am - 10:00 am", status: "Up Coming", progress: 0, iconColor: "bg-purple-100 text-purple-600" },
+      { id: 10, title: "Chemistry Final", questions: 50, duration: "90 Minutes", course: "Organic Chemistry", date: "2025-07-10", time: "1:00 pm - 2:30 pm", status: "Draft", progress: 0, iconColor: "bg-green-100 text-green-600" },
+      { id: 11, title: "Marketing Strategy", description: "Presentation deck", course: "Business Management", date: "2025-06-05", time: "Completed on June 5", status: "Completed", progress: 100, iconColor: "bg-blue-100 text-blue-600" },
+      { id: 12, title: "Algorithm Analysis", questions: 20, duration: "45 Minutes", course: "Computer Science", date: "2025-06-16", time: "Due by 4:00 pm", status: "In Progress", progress: 45, iconColor: "bg-gray-100 text-gray-600" },
+    ],
   admin: [],
 };
 

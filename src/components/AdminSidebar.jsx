@@ -18,7 +18,7 @@ const AdminSidebar = () => {
     ];
 
     return (
-        <div className="w-full h-screen bg-[#ffffff] flex flex-col items-center border-r border-r-[#f0f1f2] justify-between box-border">
+        <nav className="w-full h-screen bg-[#ffffff] flex flex-col items-center border-r border-r-[#f0f1f2] justify-between box-border">
             {/* Logo and Sidebar Items */}
             <div className='w-full'>
                 {/* Logo */}
@@ -31,7 +31,7 @@ const AdminSidebar = () => {
                 <div className='font-semibold text-[16px] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto gap-1 ${}'>
                 {sidebarItems.map((item) => (
                     // Each sidebar item as a link
-                        <Link to={item.link} className={`px-2 hover:bg-[#E6E6FA] rounded-2xl w-[90%] h-[50px] flex items-center hover:text-[#5046E5] ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
+                        <Link to={item.link} className={`px-5 hover:bg-[#E6E6FA] rounded-full w-[90%] h-[50px] flex items-center hover:text-[#5046E5] transition-all duration-1000 ease-in-out ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
                             <div className='flex items-center '>
                             <img src={item.icon} alt={item.label} className="w-5 h-5 mr-2" />
                             <span className='ml-2 ' >{item.label}</span>
@@ -41,12 +41,12 @@ const AdminSidebar = () => {
                 </div>
             </div>
             {/* Help Center */}
-            <div className='flex flex-col justify-center bg-[#f4f4f7] rounded-xl p-5 gap-5 mb-5 w-[90%]'>
+            <footer className='flex flex-col justify-center bg-[#f4f4f7] rounded-xl p-5 gap-5 mb-5 w-[90%]'>
                 <h1 className='text-[22px] font-semibold mt-2'>Need Help</h1>
                 <p className='text-[14px] text-[#6b6b6b]'>Check our documentation or contact support for Assistance</p>
-                <button className="font-semibool text-[#5046E5] px-4 py-2 rounded-lg border border-[#e5e5e5]">View help center</button>
-            </div>
-        </div>
+                <Link to="/help" className="text-center font-semibold text-[#5046E5] px-4 py-2 rounded-lg border border-[#e5e5e5]">View help center</Link>
+            </footer>
+        </nav>
     );
 };
 
