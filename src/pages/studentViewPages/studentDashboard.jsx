@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { date } from "yup";
 import TestModal from "./TestModal";
+import { Link, useNavigate } from "react-router-dom";
+
+/* StudentDashboard
+ - Shows upcoming tests and recent results for the logged-in student.
+ - Responsive card layout for upcoming tests and a compact results table.
+ - Small UX improvements: logout clears session and redirects to home.
+*/
 
 const StudentDashboard = () => {
+  // Sample upcoming tests (static data for demo). Each item includes metadata and availability.
   const upcomingTests = [
     {
       header: "Midterm Examination",
@@ -33,6 +41,7 @@ const StudentDashboard = () => {
     },
   ];
 
+  // Recent results shown in the table below (static demo data)
   const recentResults = [
     {
       testName: "Midterm Examination",
@@ -64,6 +73,7 @@ const StudentDashboard = () => {
     },
   ];
 
+  // Map a numeric score to a tailwind color class for quick visual cues
   const getScoreColor = (score) => {
     if (score >= 90) return "text-green-800 ";
     if (score >= 70) return "text-yellow-500 ";
@@ -73,6 +83,15 @@ const StudentDashboard = () => {
 
   const [isModalOpen, setisModalOpen] = useState(false);
 
+  // Navigation utility and logout handler
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear session and send user to homepage
+    localStorage.removeItem("currentUser");
+    navigate("/");
+  };
+
   return (
     <div className="bg-background-offwhite w-full overflow-hidden">
       <section className="py-8 px-10 flex justify-between items-center w-full">
@@ -80,11 +99,12 @@ const StudentDashboard = () => {
           <h1 className="text-[32px] font-bold">Upcoming Tests</h1>
         </div>
       </section>
-      <section className="px-10 flex justify-between items-center w-full my-4">
+      {/* Upcoming tests: responsive grid with small cards */}
+      <section className="px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
         {upcomingTests.map((test, index) => (
           <div
             key={index}
-            className={`bg-white rounded-2xl shadow-md p-5 w-[30%]
+            className={`bg-white rounded-2xl shadow-md p-6 transform transition-transform duration-200 hover:scale-[1.02]
             border-l-4 ${
               test.header === "Midterm Examination"
                 ? "border-l-background-blue"
@@ -130,15 +150,17 @@ const StudentDashboard = () => {
             </section>
             <section className="mt-5 text-center font-semibold">
               <button
-                className={` py-2 w-full rounded-lg ${
+                className={`py-2 w-full rounded-lg text-sm font-semibold transition-colors duration-150 ${
                   test.isClickable
-                    ? "bg-background-blue text-white cursor-pointer hover:bg-blue-800"
+                    ? "bg-background-blue text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-background-blue"
                     : "bg-background-offwhite text-gray-400 cursor-not-allowed"
                 }`}
                 disabled={!test.isClickable}
+                aria-disabled={!test.isClickable}
                 onClick={() => {
                   setisModalOpen(!isModalOpen);
                 }}
+                title={test.isClickable ? "Start the test now" : "Test not available yet"}
               >
                 {test.isClickable ? "Start Test" : "Not Available Yet"}
               </button>
@@ -147,12 +169,13 @@ const StudentDashboard = () => {
         ))}
       </section>
       <section className="px-6 md:px-8 lg:px-10 w-full my-8">
-        <div className="mb-6">
-          <h1 className="text-[28px] font-bold">Recent Results</h1>
+        <div className="mb-3">
+          <h2 className="text-[28px] font-bold">Recent Results</h2>
+          <p className="text-sm text-gray-600">Your most recent completed assessments and scores.</p>
         </div>
 
-        <div className="overflow-x-auto rounded-xl shadow-md border border-gray-100">
-          <table className="w-full">
+        <div className="overflow-x-auto rounded-xl shadow-md border border-gray-100 bg-white p-3">
+          <table className="w-full min-w-[600px]">
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-5 px-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
@@ -174,7 +197,7 @@ const StudentDashboard = () => {
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {recentResults.map((result, index) => (
-                <tr key={index} className=" transition-colors duration-150">
+                <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
                   <td className="py-5 px-6 font-semibold text-gray-900">
                     {result.testName}
                   </td>
@@ -200,12 +223,17 @@ const StudentDashboard = () => {
           </table>
         </div>
       </section>
-      <section className="px-10 mb-13 mt-9 flex justify-end w-full">
-        <button className=" px-10 py-2 bg-background-blue rounded-lg text-white  font-semibold cursor-pointer hover:bg-blue-800">
+      <section className="px-10 mt-9 flex justify-end w-full mb-10">
+        <button
+          onClick={handleLogout}
+          className="px-6 py-2 bg-background-blue rounded-lg text-white font-semibold cursor-pointer hover:bg-blue-800 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-background-blue"
+          aria-label="Log out"
+        >
           Log Out
         </button>
       </section>
 
+      {/* Modal for starting/previewing tests */}
       {isModalOpen && (
        <TestModal closeModal={setisModalOpen}/>
       )}

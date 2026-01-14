@@ -3,7 +3,8 @@ import Navbar from "../components/Navbar";
 import Ai_icon from "/Icons/Form icons/Ai - powered icon.svg";
 import Built_in_plagiarism from "/Icons/Form icons/Built-In plagiarism icon.svg";
 import Distraction_Free from "/Icons/Form icons/DistractionFree icon.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signUpSchema } from "../schema/validation.jsx";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -20,13 +21,137 @@ const Login = () => {
 
   const handlClick2 = () => {
     setShow2(!show2);
-  }
+  };
 
   // Track the selected role (either "student" or "admin")
   const [role, setRole] = useState("student");
 
-  // Track whether the user is signed in or creating an account
-  const [signedIn, setSignedIn] = useState(false);
+  // Track whether the user is signed in (true => show login form)
+  const [signedIn, setSignedIn] = useState(true);
+
+  // Controlled input state for signup and login
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [institute, setInstitute] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  // UI state
+  const [errors, setErrors] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
+
+  // Simple password rules (same as validation file)
+  const passwordRules = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+
+  const resetMessages = () => {
+    setErrors("");
+    setSuccess("");
+  };
+
+  const getUsers = () => {
+    try {
+      return JSON.parse(localStorage.getItem("users") || "[]");
+    } catch (e) {
+      return [];
+    }
+  };
+
+  const saveUsers = (users) => {
+    localStorage.setItem("users", JSON.stringify(users));
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    resetMessages();
+
+    // Basic validation using signUpSchema for names and institute
+    try {
+      await signUpSchema.validate({
+        firstName,
+        lastName,
+        schoolOrInstituteName: institute,
+      });
+    } catch (err) {
+      setErrors(err.message);
+      return;
+    }
+
+    if (!passwordRules.test(password)) {
+      setErrors(
+        "Password must be 8+ chars, contain 1 uppercase letter, 1 number and 1 special character"
+      );
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrors("Passwords do not match");
+      return;
+    }
+
+    // Prevent duplicate emails for same role
+    const users = getUsers();
+    const exists = users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase() && u.role === role
+    );
+
+    if (exists) {
+      setErrors("An account with this email and role already exists");
+      return;
+    }
+
+    const newUser = {
+      id: Date.now(),
+      firstName,
+      lastName,
+      email,
+      institute,
+      password,
+      role,
+    };
+
+    users.push(newUser);
+    saveUsers(users);
+
+    setSuccess("Account created successfully. Redirecting...");
+
+    // Auto-login: save current user and navigate
+    localStorage.setItem("currentUser", JSON.stringify(newUser));
+    setTimeout(() => {
+      if (role === "admin") navigate("/admin");
+      else navigate("/student-view");
+    }, 800);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    resetMessages();
+
+    const users = getUsers();
+    const user = users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase() && u.role === role
+    );
+
+    if (!user) {
+      setErrors("No account found for this email/role");
+      return;
+    }
+
+    if (user.password !== password) {
+      setErrors("Incorrect password");
+      return;
+    }
+
+    // Successful login
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    setSuccess("Signed in. Redirecting...");
+
+    setTimeout(() => {
+      if (role === "admin") navigate("/admin");
+      else navigate("/student-view");
+    }, 500);
+  };
 
   return (
     <div>
@@ -92,18 +217,18 @@ const Login = () => {
 
           {/* ========== Right Panel: Login / Create account form ========== */}
           <div className="bg-[#F0F1F2] p-5 h-full rounded-r-xl flex justify-center items-center">
-            <div className="flex flex-col">
+            <div className="flex flex-col w-[360px]">
               {/* Form title */}
               <h1 className="text-center font-[650] text-3xl text-[#282373] mb-3">
                 {signedIn ? "Login Account" : "Create Account"}
               </h1>
-              <p className="text-center">
+              <p className="text-center mb-2">
                 Join SOAFT to start your secure assessment journey
               </p>
 
               {/* Role switcher: Student or Admin */}
-              <p className="mt-5 mb-3 font-medium">I am a/an:</p>
-              <div className="border border-[#5046e5] rounded-full h-8 flex">
+              <p className="mt-2 mb-3 font-medium">I am a/an:</p>
+              <div className="border border-[#5046e5] rounded-full h-8 flex mb-3">
                 {/* Student tab */}
                 <button
                   className={`text-[#5046E5] font-medium h-full rounded-full w-1/2 ${
@@ -129,15 +254,21 @@ const Login = () => {
                 </button>
               </div>
 
+              {/* Feedback messages */}
+              {errors && <div className="text-[#DC3545] mb-2">{errors}</div>}
+              {success && <div className="text-[#198754] mb-2">{success}</div>}
+
               {/* Form Section */}
               {!signedIn ? (
                 // ========== Create Account Form ==========
-                <form action="" className="my-3">
+                <form onSubmit={handleSignUp} className="my-3">
                   {/* Name fields */}
                   <div className="flex gap-x-6 w-full">
                     <div className="w-full">
                       <label className="font-medium">First Name</label>
                       <input
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                         type="text"
                         className="bg-[#E2E3E5] block h-8 w-full"
                       />
@@ -145,6 +276,8 @@ const Login = () => {
                     <div className="w-full">
                       <label className="font-medium">Last Name</label>
                       <input
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                         type="text"
                         className="bg-[#E2E3E5] block h-8 w-full"
                       />
@@ -155,8 +288,11 @@ const Login = () => {
                   <div className="my-2">
                     <label className="font-medium">Email Address</label>
                     <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       className="block bg-[#E2E3E5] h-8 w-full"
+                      required
                     />
                   </div>
 
@@ -164,12 +300,11 @@ const Login = () => {
                   <div className="my-2">
                     <label className="font-medium">School/Institute Name</label>
                     <input
-                      type="email"
+                      value={institute}
+                      onChange={(e) => setInstitute(e.target.value)}
+                      type="text"
                       className="block bg-[#E2E3E5] h-8 w-full"
                     />
-                    <p className="text-sm font-thin text-[#DC3545]">
-                      Email must consist of your full name
-                    </p>
                   </div>
 
                   {/* Password field */}
@@ -177,66 +312,64 @@ const Login = () => {
                     <label className="font-medium">Password</label>
                     <div>
                       <input
-                      type={show ? "text" : "password"}
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                    <small
-                      className="hover: cursor-pointer"
-                      onClick={handlClick}
-                    >
-                      {show ? (
-                        <img
-                          src="/images/hidePassword.svg"
-                          className="w-6 h-6 absolute -translate-y-1 top-1/2  right-2"
-                        />
-                      ) : (
-                        <img
-                          src="/images/showPassword.svg"
-                          className="w-6 h-6 absolute -translate-y-1 top-1/2 right-2"
-                        />
-                      )}
-                    </small>
-                    </div>
-                    {/* Password strength bar */}
-                    <div className="h-1.5 w-full bg-gray-200 rounded-full mt-2">
-                      <div className="w-20 bg-amber-400 h-full rounded-full"></div>
-                      <small className="text-[#343A40]">
-                        Password Strength: Too Weak
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        type={show ? "text" : "password"}
+                        className="block bg-[#E2E3E5] h-8 w-full"
+                        required
+                      />
+                      <small
+                        className="hover: cursor-pointer"
+                        onClick={handlClick}
+                      >
+                        {show ? (
+                          <img
+                            src="/images/hidePassword.svg"
+                            className="w-6 h-6 absolute -translate-y-1 top-1/2  right-2"
+                          />
+                        ) : (
+                          <img
+                            src="/images/showPassword.svg"
+                            className="w-6 h-6 absolute -translate-y-1 top-1/2 right-2"
+                          />
+                        )}
                       </small>
                     </div>
                   </div>
 
                   {/* Confirm password */}
-                  <div className="relative mt-10 mb-4">
+                  <div className="relative mt-4 mb-4">
                     <label className="font-medium">Confirm Password</label>
                     <div>
                       <input
-                      type={show1 ? "text" : "password"}
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                    <small
-                      className="hover: cursor-pointer"
-                      onClick={handlClick1}
-                    >
-                      {show1 ? (
-                        <img
-                          src="/images/hidePassword.svg"
-                          className="w-6 h-6 absolute top-1/2  right-2"
-                        />
-                      ) : (
-                        <img
-                          src="/images/showPassword.svg"
-                          className="w-6 h-6 absolute top-1/2 right-2"
-                        />
-                      )}
-                    </small>
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        type={show1 ? "text" : "password"}
+                        className="block bg-[#E2E3E5] h-8 w-full"
+                        required
+                      />
+                      <small
+                        className="hover: cursor-pointer"
+                        onClick={handlClick1}
+                      >
+                        {show1 ? (
+                          <img
+                            src="/images/hidePassword.svg"
+                            className="w-6 h-6 absolute top-1/2  right-2"
+                          />
+                        ) : (
+                          <img
+                            src="/images/showPassword.svg"
+                            className="w-6 h-6 absolute top-1/2 right-2"
+                          />
+                        )}
+                      </small>
                     </div>
-                    
                   </div>
 
                   {/* Terms agreement */}
                   <p className="my-3">
-                    <input type="checkbox" id="myCheckbox" /> I agree to the{" "}
+                    <input type="checkbox" id="myCheckbox" required /> I agree to the{" "}
                     <a href="#" className="text-[#5046E5]">
                       Terms of Service
                     </a>{" "}
@@ -247,19 +380,22 @@ const Login = () => {
                   </p>
 
                   {/* Submit button */}
-                  <button className="w-full bg-[#5046e5] h-8 rounded text-[#ffffff] font-medium">
+                  <button type="submit" className="w-full bg-[#5046e5] h-8 rounded text-[#ffffff] font-medium">
                     Create Account
                   </button>
                 </form>
               ) : (
                 // ========== Login Form ==========
-                <form action="">
+                <form onSubmit={handleLogin}>
                   {/* Email field */}
                   <div className="my-3">
                     <label className="font-normal">Email Address</label>
                     <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       className="block bg-[#E2E3E5] h-8 w-full"
+                      required
                     />
                   </div>
 
@@ -267,12 +403,15 @@ const Login = () => {
                   <div className="my-3">
                     <label className="flex justify-between">
                       <span>Password</span>
-                      <span>Forget Password</span>
+                      <span className="text-sm text-[#5046E5] hover:cursor-pointer">Forget Password</span>
                     </label>
                     <div className="relative">
                       <input
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         type={show2 ? "text" : "password"}
                         className="block bg-[#E2E3E5] h-8 w-full"
+                        required
                       />
                       <small
                         className="hover: cursor-pointer"
@@ -298,8 +437,8 @@ const Login = () => {
                   </div>
 
                   {/* Login button */}
-                  <button className="w-full bg-[#5046e5] h-8 my-3 rounded text-[#ffffff] font-medium">
-                    <Link to="/Admin/">Sign in</Link>
+                  <button type="submit" className="w-full bg-[#5046e5] h-8 my-3 rounded text-[#ffffff] font-medium">
+                    Sign in
                   </button>
                 </form>
               )}
@@ -309,7 +448,10 @@ const Login = () => {
                 <p className="text-center font-medium">
                   Don't have an account?{" "}
                   <a
-                    onClick={() => setSignedIn(false)}
+                    onClick={() => {
+                      setSignedIn(false);
+                      resetMessages();
+                    }}
                     className="text-[#5046e5] hover:cursor-pointer"
                   >
                     Create account
@@ -319,7 +461,10 @@ const Login = () => {
                 <p className="text-center font-medium">
                   Already have an account?{" "}
                   <a
-                    onClick={() => setSignedIn(true)}
+                    onClick={() => {
+                      setSignedIn(true);
+                      resetMessages();
+                    }}
                     className="text-[#5046e5] hover:cursor-pointer"
                   >
                     Sign in
