@@ -2,326 +2,222 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import { useNavigate } from "react-router-dom"; 
 import Navbar from "../components/Navbar";
+
+// Asset Imports
 import Ai_icon from "/Icons/Form icons/Ai - powered icon.svg";
 import Built_in_plagiarism from "/Icons/Form icons/Built-In plagiarism icon.svg";
 import Distraction_Free from "/Icons/Form icons/DistractionFree icon.svg";
-import { Link } from "react-router-dom";
+
+/**
+ * ZOD VALIDATION SCHEMAS
+ * These define the "rules" for our forms. 
+ * zod-formik-adapter converts these into a format Formik understands.
+ */
+
+// Schema for Registration
+const signupSchema = z.object({
+    firstName: z.string().min(2, "First name is too short"),
+    lastName: z.string().min(2, "Last name is too short"),
+    email: z.string().email("Invalid email address"),
+    school: z.string().min(3, "School name is required"),
+    password: z.string().min(8, "Must be at least 8 characters"),
+    confirmPassword: z.string(),
+    // z.literal(true) ensures the form cannot be submitted unless this is checked
+    terms: z.literal(true, {
+      errorMap: () => ({ message: "You must accept the terms" }),
+    }),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"], // Highlights the confirmPassword field specifically
+  });
+
+// Schema for Login
+const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+});
+
+/**
+ * REUSABLE INPUT COMPONENT
+ * Handles the label, the input field (Field), password toggling, and error display.
+ */
+const FormInput = ({ label, name, type = "text", showPasswordToggle, onToggle, isVisible, helperText }) => (
+  <div className="my-3 w-full">
+    <div className="flex justify-between items-center mb-1">
+      <label className="font-medium text-sm text-slate-700">{label}</label>
+    </div>
+    <div className="relative">
+      <Field
+        name={name}
+        // If it's a password field, toggle between 'text' and 'password' types
+        type={showPasswordToggle ? (isVisible ? "text" : "password") : type}
+        className="block bg-[#E2E3E5] h-9 w-full px-3 rounded border border-transparent focus:border-[#5046e5] focus:bg-white transition-all outline-none text-sm"
+      />
+      {showPasswordToggle && (
+        <button type="button" onClick={onToggle} className="absolute right-3 top-1/2 -translate-y-1/2">
+          <img 
+            src={isVisible ? "/images/hidePassword.svg" : "/images/showPassword.svg"} 
+            className="w-5 h-5 opacity-60" 
+            alt="toggle visibility" 
+          />
+        </button>
+      )}
+    </div>
+    {/* Automatically displays validation errors from Zod */}
+    <ErrorMessage name={name} component="small" className="text-[#DC3545] text-[11px] mt-1" />
+    {helperText && <p className="text-[11px] text-slate-500 mt-1 opacity-70">{helperText}</p>}
+  </div>
+);
 
 const Login = () => {
-  const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState(false);
-  const [show2, setShow2] = useState(false);
+  const navigate = useNavigate(); // Hook for programmatic navigation
+  
+  // COMPONENT STATE
+  const [role, setRole] = useState("student"); // Tracks if user is 'student' or 'admin'
+  const [signedIn, setSignedIn] = useState(false); // Toggle between Login and Signup view
+  
+  // Track visibility for three different password fields separately
+  const [visibility, setVisibility] = useState({ 
+    pass: false, 
+    confirm: false, 
+    login: false 
+  });
 
-  const handlClick = () => {
-    setShow(!show);
+  const toggleVisibility = (key) => setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  /**
+   * FORM SUBMISSION HANDLER
+   * This runs only if the form passes all Zod validation rules.
+   */
+  const handleSubmit = (values, { setSubmitting }) => {
+    console.log("Submitting Data:", values);
+    
+    // In a real app, you would perform your API call here
+    setTimeout(() => {
+      setSubmitting(false);
+      
+      // LOGIC: Lead user to different dashboards based on the selected Role
+      if (role === "admin") {
+        navigate("/Admin"); // Navigate to Admin Panel
+      } else {
+        navigate("/student-view"); // Navigate to Student Dashboard
+      }
+    }, 1000);
   };
-
-  const handlClick1 = () => {
-    setShow1(!show1);
-  };
-
-  const handlClick2 = () => {
-    setShow2(!show2);
-  }
-
-  // Track the selected role (either "student" or "admin")
-  const [role, setRole] = useState("student");
-
-  // Track whether the user is signed in or creating an account
-  const [signedIn, setSignedIn] = useState(false);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-sans bg-white">
       <Navbar />
-
-      <div className="flex justify-center items-start py-8">
-        {/* Main container - removed fixed height */}
-        <div className="flex items-stretch w-[1000px] min-h-[500px]">
-          {/* ========== Left Panel ========== */}
-          <div className="bg-[rgba(80,70,229,1)] opacity-95 rounded-l-xl p-7 text-[#ffffff] w-[50%] flex items-center">
-            <div className="w-full">
-              <div>
-                <h1 className="font-bold text-3xl mb-2">SOAFT</h1>
-                <p className="font-light text-m">
-                  Secure Online Assessment Platform
-                </p>
-              </div>
-
-              <div>
-                <h2 className="font-medium text-2xl my-5">
-                  Empower Your Educational Assessment
-                </h2>
-                <p className="text-sm font-sans my-5">
-                  Create, deliver and grade test with minimal effort while
-                  ensuring academic integrity through our comprehensive
-                  anti-cheating measures.
-                </p>
-
-                <ul className="my-8">
-                  <li className="my-5 flex items-center gap-x-5">
-                    <div className="bg-[#FEFCF6] rounded-full inline-flex justify-center items-center p-1.5">
-                      <img src={Ai_icon} alt="" />
+      <div className="flex justify-center items-start py-12">
+        {/* Container for Left (Branding) and Right (Form) panels */}
+        <div className="flex items-stretch shadow-2xl rounded-xl overflow-hidden w-[1000px] min-h-[600px]">
+          
+          {/* ========== LEFT PANEL: BRANDING & FEATURES ========== */}
+          <div className="bg-[#5046e5] p-10 text-white w-1/2 flex flex-col justify-between">
+            <div>
+              <h1 className="font-bold text-3xl tracking-tight mb-1">SOAFT</h1>
+              <p className="font-light opacity-80 text-sm">Secure Online Assessment Platform</p>
+              <h2 className="font-semibold text-2xl mt-10 mb-4 leading-tight">Empower Your Educational Assessment</h2>
+              
+              <ul className="space-y-6 mt-8">
+                {[{ icon: Ai_icon, text: "AI-Powered Grading & Feedback" }, 
+                  { icon: Built_in_plagiarism, text: "Built-In Plagiarism Detection" }, 
+                  { icon: Distraction_Free, text: "Secure Test Environment" }].map((item, i) => (
+                  <li key={i} className="flex items-center gap-4 text-sm font-medium">
+                    <div className="bg-white/10 p-2 rounded-full">
+                      <img src={item.icon} className="w-5 h-5 brightness-200" alt="" />
                     </div>
-                    AI-Powered Grading & Instant Feedback
+                    {item.text}
                   </li>
-                  <li className="my-5 flex items-center gap-x-5">
-                    <div className="bg-[#FEFCF6] rounded-full inline-flex justify-center items-center p-1.5">
-                      <img src={Built_in_plagiarism} alt="" />
-                    </div>
-                    Built-In Plagiarism Detection
-                  </li>
-                  <li className="my-5 flex items-center gap-x-5">
-                    <div className="bg-[#FEFCF6] rounded-full inline-flex justify-center items-center p-1.5">
-                      <img src={Distraction_Free} alt="" />
-                    </div>
-                    Distraction-Free, Secure Test Environment
-                  </li>
-                </ul>
-              </div>
-
-              <p>&copy; 2025 SOAFT. All rights reserved.</p>
+                ))}
+              </ul>
             </div>
+            <p className="text-xs opacity-50">&copy; 2026 SOAFT. All rights reserved.</p>
           </div>
 
-          {/* ========== Right Panel: Login / Create account form ========== */}
-          <div className="bg-[#F0F1F2] p-5 h-full rounded-r-xl flex justify-center items-center">
-            <div className="flex flex-col">
-              {/* Form title */}
-              <h1 className="text-center font-[650] text-3xl text-[#282373] mb-3">
-                {signedIn ? "Login Account" : "Create Account"}
-              </h1>
-              <p className="text-center">
-                Join SOAFT to start your secure assessment journey
-              </p>
-
-              {/* Role switcher: Student or Admin */}
-              <p className="mt-5 mb-3 font-medium">I am a/an:</p>
-              <div className="border border-[#5046e5] rounded-full h-8 flex">
-                {/* Student tab */}
-                <button
-                  type="button"
-                  className={`text-[#5046E5] font-medium h-full rounded-full w-1/2 ${
-                    role === "student"
-                      ? "bg-[#5046e5] font-[500] text-[#ffffff]"
-                      : ""
-                  }`}
-                  onClick={() => setRole("student")}
-                >
-                  Student
-                </button>
-                <button
-                  type="button"
-                  className={`text-[#5046E5] font-medium h-full rounded-full w-1/2 ${
-                    role === "admin"
-                      ? "bg-[#5046e5] font-[500] text-[#ffffff]"
-                      : ""
-                  }`}
-                  onClick={() => setRole("admin")}
-                >
-                  Administrator
-                </button>
+          {/* ========== RIGHT PANEL: THE FORM ========== */}
+          <div className="bg-[#F8F9FA] p-10 w-1/2 flex flex-col justify-center">
+            <h1 className="text-center font-bold text-3xl text-[#282373] mb-2">
+              {signedIn ? "Welcome Back" : "Create Account"}
+            </h1>
+            
+            {/* ROLE SWITCHER */}
+            <div className="mb-6 mt-4">
+              <div className="bg-slate-200 p-1 rounded-lg flex h-10">
+                <button 
+                  onClick={() => setRole("student")} 
+                  className={`flex-1 rounded-md text-sm font-semibold transition-all ${role === "student" ? "bg-white text-[#5046e5] shadow-sm" : "text-slate-500"}`}
+                >Student</button>
+                <button 
+                  onClick={() => setRole("admin")} 
+                  className={`flex-1 rounded-md text-sm font-semibold transition-all ${role === "admin" ? "bg-white text-[#5046e5] shadow-sm" : "text-slate-500"}`}
+                >Administrator</button>
               </div>
-
-              {/* Feedback messages */}
-              {errors && <div className="text-[#DC3545] mb-2">{errors}</div>}
-              {success && <div className="text-[#198754] mb-2">{success}</div>}
-
-              {!signedIn ? (
-                // ========== Create Account Form ==========
-                <form action="" className="my-3">
-                  {/* Name fields */}
-                  <div className="flex gap-x-6 w-full">
-                    <div className="w-full">
-                      <label className="font-medium">First Name</label>
-                      <input
-                        type="text"
-                        className="bg-[#E2E3E5] block h-8 w-full"
-                      />
-                    </div>
-                    <div className="w-full">
-                      <label className="font-medium">Last Name</label>
-                      <input
-                        type="text"
-                        className="bg-[#E2E3E5] block h-8 w-full"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Email field */}
-                  <div className="my-2">
-                    <label className="font-medium">Email Address</label>
-                    <input
-                      type="email"
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                  </div>
-
-                  {/* School field */}
-                  <div className="my-2">
-                    <label className="font-medium">School/Institute Name</label>
-                    <input
-                      type="email"
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                    <p className="text-sm font-thin text-[#DC3545]">
-                      Email must consist of your full name
-                    </p>
-                  </div>
-
-                  {/* Password field */}
-                  <div className="relative">
-                    <label className="font-medium">Password</label>
-                    <div>
-                      <input
-                      type={show ? "text" : "password"}
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                    <small
-                      className="hover: cursor-pointer"
-                      onClick={handlClick}
-                    >
-                      {show ? (
-                        <img
-                          src="/images/hidePassword.svg"
-                          className="w-6 h-6 absolute -translate-y-1 top-1/2  right-2"
-                        />
-                      ) : (
-                        <img
-                          src="/images/showPassword.svg"
-                          className="w-6 h-6 absolute -translate-y-1 top-1/2 right-2"
-                        />
-                      )}
-                    </small>
-                    </div>
-                    {/* Password strength bar */}
-                    <div className="h-1.5 w-full bg-gray-200 rounded-full mt-2">
-                      <div className="w-20 bg-amber-400 h-full rounded-full"></div>
-                      <small className="text-[#343A40]">
-                        Password Strength: Too Weak
-                      </small>
-                    </div>
-                  </div>
-
-                  {/* Confirm password */}
-                  <div className="relative mt-10 mb-4">
-                    <label className="font-medium">Confirm Password</label>
-                    <div>
-                      <input
-                      type={show1 ? "text" : "password"}
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                    <small
-                      className="hover: cursor-pointer"
-                      onClick={handlClick1}
-                    >
-                      {show1 ? (
-                        <img
-                          src="/images/hidePassword.svg"
-                          className="w-6 h-6 absolute top-1/2  right-2"
-                        />
-                      ) : (
-                        <img
-                          src="/images/showPassword.svg"
-                          className="w-6 h-6 absolute top-1/2 right-2"
-                        />
-                      )}
-                    </small>
-                    </div>
-                    
-                  </div>
-
-                  {/* Terms agreement */}
-                  <p className="my-3">
-                    <input type="checkbox" id="myCheckbox" /> I agree to the{" "}
-                    <a href="#" className="text-[#5046E5]">
-                      Terms of Service
-                    </a>{" "}
-                    and{" "}
-                    <a href="#" className="text-[#5046E5]">
-                      Privacy Policy
-                    </a>
-                  </p>
-
-                  {/* Submit button */}
-                  <button className="w-full bg-[#5046e5] h-8 rounded text-[#ffffff] font-medium">
-                    Create Account
-                  </button>
-                </form>
-              ) : (
-                // ========== Login Form ==========
-                <form action="">
-                  {/* Email field */}
-                  <div className="my-3">
-                    <label className="font-normal">Email Address</label>
-                    <input
-                      type="email"
-                      className="block bg-[#E2E3E5] h-8 w-full"
-                    />
-                  </div>
-
-                  {/* Password field with "Forget Password" */}
-                  <div className="my-3">
-                    <label className="flex justify-between">
-                      <span>Password</span>
-                      <span>Forget Password</span>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type={show2 ? "text" : "password"}
-                        className="block bg-[#E2E3E5] h-8 w-full"
-                      />
-                      <small
-                        className="hover: cursor-pointer"
-                        onClick={handlClick2}
-                      >
-                        {show2 ? (
-                          <img
-                            src="/images/hidePassword.svg"
-                            className="w-6 h-6 absolute top-1/2 -translate-y-1/2 right-2"
-                          />
-                        ) : (
-                          <img
-                            src="/images/showPassword.svg"
-                            className="w-6 h-6 absolute top-1/2 -translate-y-1/2 right-2"
-                          />
-                        )}
-                      </small>
-                    </div>
-
-                      {/* Hidden role field */}
-                      <Field type="hidden" name="role" value={role} />
-
-                  {/* Login button */}
-                  <button className="w-full bg-[#5046e5] h-8 my-3 rounded text-[#ffffff] font-medium">
-                    <Link to="/Admin/">Sign in</Link>
-                  </button>
-                </form>
-              )}
-
-              {/* Toggle between login and create account */}
-              {signedIn ? (
-                <p className="text-center font-medium mt-6">
-                  Don't have an account?{" "}
-                  <a
-                    onClick={() => setSignedIn(false)}
-                    className="text-[#5046e5] hover:cursor-pointer"
-                  >
-                    Create account
-                  </button>
-                </p>
-              ) : (
-                <p className="text-center font-medium mt-6">
-                  Already have an account?{" "}
-                  <a
-                    onClick={() => setSignedIn(true)}
-                    className="text-[#5046e5] hover:cursor-pointer"
-                  >
-                    Sign in
-                  </button>
-                </p>
-              )}
             </div>
+
+            {/* FORMIK WRAPPER */}
+            <Formik
+              // Determine initial values based on whether user is logging in or signing up
+              initialValues={signedIn 
+                ? { email: "", password: "", role } 
+                : { firstName: "", lastName: "", email: "", school: "", password: "", confirmPassword: "", terms: false, role }
+              }
+              // Switch between schemas based on state
+              validationSchema={toFormikValidationSchema(signedIn ? loginSchema : signupSchema)}
+              enableReinitialize // Important: allows form to reset when switching between Login/Signup
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting }) => (
+                <Form className="flex flex-col">
+                  {!signedIn ? (
+                    /* SIGN UP FIELDS */
+                    <>
+                      <div className="flex gap-4">
+                        <FormInput label="First Name" name="firstName" />
+                        <FormInput label="Last Name" name="lastName" />
+                      </div>
+                      <FormInput label="Email Address" name="email" type="email" />
+                      <FormInput label="School Name" name="school" />
+                      <FormInput label="Password" name="password" showPasswordToggle isVisible={visibility.pass} onToggle={() => toggleVisibility("pass")} />
+                      <FormInput label="Confirm Password" name="confirmPassword" showPasswordToggle isVisible={visibility.confirm} onToggle={() => toggleVisibility("confirm")} />
+                      
+                      {/* Terms Checkbox Field */}
+                      <div className="my-2">
+                        <label className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
+                          <Field type="checkbox" name="terms" className="w-4 h-4 accent-[#5046e5]" />
+                          I agree to the <span className="text-[#5046e5] underline">Terms & Privacy</span>
+                        </label>
+                        <ErrorMessage name="terms" component="small" className="text-[#DC3545] text-[11px] block mt-1" />
+                      </div>
+                    </>
+                  ) : (
+                    /* LOGIN FIELDS */
+                    <>
+                      <FormInput label="Email Address" name="email" type="email" />
+                      <FormInput label="Password" name="password" showPasswordToggle isVisible={visibility.login} onToggle={() => toggleVisibility("login")} />
+                    </>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting} // Prevents double submission
+                    className="w-full bg-[#5046e5] text-white py-3 rounded-lg font-bold mt-4 hover:bg-[#3f36b5] active:scale-[0.98] disabled:opacity-50 transition-all"
+                  >
+                    {signedIn ? (isSubmitting ? "Processing..." : "Sign In") : (isSubmitting ? "Creating..." : "Create Account")}
+                  </button>
+                </Form>
+              )}
+            </Formik>
+
+            {/* TOGGLE LINK */}
+            <p className="text-center mt-8 text-sm text-slate-600">
+              {signedIn ? "Don't have an account? " : "Already have an account? "}
+              <span onClick={() => setSignedIn(!signedIn)} className="text-[#5046e5] font-bold cursor-pointer hover:underline">
+                {signedIn ? "Create account" : "Sign in"}
+              </span>
+            </p>
           </div>
         </div>
       </div>
