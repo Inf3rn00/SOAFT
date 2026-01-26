@@ -109,7 +109,7 @@ const AssessmentContent = () => {
       {/* --- PAGE HEADER SECTION --- */}
       <section className="p-5 flex flex-col md:flex-row justify-between items-start md:items-center w-full">
         <div>
-          <h1 className="text-[32px] font-semibold text-gray-900">
+          <h1 className="text-[2rem] font-semibold text-gray-900">
             Assessment
           </h1>
           <p className="text-[rgb(108,117,125)] mt-2">Create, manage and monitor all your assessment in one place</p>
@@ -164,8 +164,8 @@ const AssessmentContent = () => {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-6 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${activeTab === tab
-                      ? 'bg-white text-indigo-600 shadow-sm'
-                      : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'
+                    ? 'bg-white text-indigo-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'
                     }`}
                 >
                   {tab}
@@ -213,8 +213,8 @@ const AssessmentContent = () => {
               onClick={handleDelete}
               disabled={selectedItems.length === 0}
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm border transition-colors ${selectedItems.length > 0
-                  ? 'text-red-500 bg-red-50 border-red-100 hover:bg-red-100 cursor-pointer'
-                  : 'text-gray-300 bg-gray-50 border-gray-100 cursor-not-allowed'
+                ? 'text-red-500 bg-red-50 border-red-100 hover:bg-red-100 cursor-pointer'
+                : 'text-gray-300 bg-gray-50 border-gray-100 cursor-not-allowed'
                 }`}
             >
               <Trash2 size={16} />
@@ -351,8 +351,8 @@ const AssessmentContent = () => {
                   key={page}
                   onClick={() => setCurrentPage(page)}
                   className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-all ${currentPage === page
-                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200'
-                      : 'hover:bg-gray-50 text-gray-600 hover:shadow-sm'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200'
+                    : 'hover:bg-gray-50 text-gray-600 hover:shadow-sm'
                     }`}
                 >
                   {page}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link , useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from "/Icons/landing page icons/LOGO.png";
 import dashboardIcon from "/Icons/Admin page icons/sidebar/DahboardIcon.svg";
 import AssesmentIcon from "/Icons/Admin page icons/sidebar/AssessmentIcon.svg";
@@ -10,11 +10,11 @@ import settingsIcon from "/Icons/Admin page icons/sidebar/settingsIcon.svg";
 const AdminSidebar = () => {
     const location = useLocation();
     const sidebarItems = [
-        { label: "Dashboard", icon: dashboardIcon, link: "/admin/" }, 
-        { label: "Assessment", icon: AssesmentIcon, link: "/admin/assessment" }, 
-        { label: "Result", icon: ResultIcon, link: "/admin/result" }, 
-        { label: "Question Bank", icon: questionBank, link: "/admin/question-bank" }, 
-        { label: "Settings", icon: settingsIcon, link: "/admin/settings" }, 
+        { label: "Dashboard", icon: dashboardIcon, link: "/admin/" },
+        { label: "Assessment", icon: AssesmentIcon, link: "/admin/assessment" },
+        { label: "Result", icon: ResultIcon, link: "/admin/result" },
+        { label: "Question Bank", icon: questionBank, link: "/admin/question-bank" },
+        { label: "Settings", icon: settingsIcon, link: "/admin/settings" },
     ];
 
     return (
@@ -24,26 +24,26 @@ const AdminSidebar = () => {
                 {/* Logo */}
                 <div className="flex items-center h-17 border-b border-b-[#f0f1f2]">
                     <div className="w-[80%] mx-auto">
-                        <Link to='/'><img src={logo} alt="Logo" className="h-[43px] w-[48px]" /></Link>
+                        <Link to='/'><img src={logo} alt="Logo" className="h-[2.68rem] w-[3rem]" /></Link>
                     </div>
                 </div>
                 {/* Sidebar Items */}
-                <div className='font-semibold text-[16px] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto gap-1 ${}'>
-                {sidebarItems.map((item) => (
-                    // Each sidebar item as a link
-                        <Link to={item.link} className={`px-5 hover:bg-[#E6E6FA] rounded-full w-[90%] h-[50px] flex items-center hover:text-[#5046E5] transition-all duration-1000 ease-in-out ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
+                <div className='font-semibold text-[1rem] text-[#2e2e2e] mt-5 flex flex-col w-[80%] mx-auto gap-1 ${}'>
+                    {sidebarItems.map((item) => (
+                        // Each sidebar item as a link
+                        <Link to={item.link} className={`px-5 hover:bg-[#E6E6FA] rounded-full w-[90%] h-[3.125rem] flex items-center hover:text-[#5046E5] transition-all duration-1000 ease-in-out ${item.link === location.pathname ? 'bg-[#E6E6FA] text-[#5046E5]' : ''}`} key={item.label}>
                             <div className='flex items-center '>
-                            <img src={item.icon} alt={item.label} className="w-5 h-5 mr-2" />
-                            <span className='ml-2 ' >{item.label}</span>
+                                <img src={item.icon} alt={item.label} className="w-5 h-5 mr-2" />
+                                <span className='ml-2 ' >{item.label}</span>
                             </div>
                         </Link>
-                ))}
+                    ))}
                 </div>
             </div>
             {/* Help Center */}
             <footer className='flex flex-col justify-center bg-[#f4f4f7] rounded-xl p-5 gap-5 mb-5 w-[90%]'>
-                <h1 className='text-[22px] font-semibold mt-2'>Need Help</h1>
-                <p className='text-[14px] text-[#6b6b6b]'>Check our documentation or contact support for Assistance</p>
+                <h1 className='text-[1.375rem] font-semibold mt-2'>Need Help</h1>
+                <p className='text-[0.875rem] text-[#6b6b6b]'>Check our documentation or contact support for Assistance</p>
                 <Link to="/" className="text-center font-semibold text-[#5046E5] px-4 py-2 rounded-lg border border-[#e5e5e5]">View help center</Link>
             </footer>
         </nav>

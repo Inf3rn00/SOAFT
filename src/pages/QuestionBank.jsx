@@ -490,7 +490,7 @@ const QuestionBank = () => {
       {/* PAGE HEADER SECTION */}
       <section className="p-5 flex justify-between items-center w-full">
         <div>
-          <h1 className="text-[32px] font-semibold ">Question Bank</h1>
+          <h1 className="text-[2rem] font-semibold ">Question Bank</h1>
           <p className="text-[rgb(108,117,125)] mt-2">
             Create, manage and organize your question library all in one place
           </p>
@@ -524,7 +524,7 @@ const QuestionBank = () => {
 
               {/* Active Subject Filter Tag */}
               {subject && (
-                <div className="bg-background-offwhite p-4 text-xs font-medium rounded-[30px] flex justify-between ">
+                <div className="bg-background-offwhite p-4 text-xs font-medium rounded-[1.875rem] flex justify-between ">
                   <p>Subject: {subject}</p>
                   <img
                     src={deleteBtn}
@@ -558,7 +558,7 @@ const QuestionBank = () => {
 
               {/* Active Question Type Filter Tag */}
               {question && (
-                <div className="bg-background-offwhite p-4 font-medium text-xs rounded-[30px] flex justify-between ">
+                <div className="bg-background-offwhite p-4 font-medium text-xs rounded-[1.875rem] flex justify-between ">
                   <p>Question Type: {question}</p>
                   <img
                     src={deleteBtn}
@@ -573,7 +573,7 @@ const QuestionBank = () => {
             {/* Clear All Filters Button - Only shows when both filters active */}
             {subject && question ? (
               <p
-                className=" text-background-blue px-4 py-2 rounded-lg gap-1 cursor-pointer h-[40px] self-end"
+                className=" text-background-blue px-4 py-2 rounded-lg gap-1 cursor-pointer h-[2.5rem] self-end"
                 onClick={clearAll}
               >
                 Clear All
@@ -601,7 +601,7 @@ const QuestionBank = () => {
 
             {/* Active Sort Filter Tag */}
             {sort && (
-              <div className="bg-background-offwhite p-4 font-medium text-xs rounded-[30px] flex justify-between ">
+              <div className="bg-background-offwhite p-4 font-medium text-xs rounded-[1.875rem] flex justify-between ">
                 <p>Sort: {sort}</p>
                 <img
                   src={deleteBtn}
@@ -720,7 +720,7 @@ const QuestionBank = () => {
                       <div
                         className={`${questionTypeColour(
                           item.type
-                        )} py-3 px-3 rounded-[30px] text-center w-fit text-xs font-semibold`}
+                        )} py-3 px-3 rounded-[1.875rem] text-center w-fit text-xs font-semibold`}
                       >
                         {item.type}
                       </div>
@@ -792,8 +792,8 @@ const QuestionBank = () => {
                   key={page}
                   onClick={() => setCurrentPage(page)}
                   className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-all ${currentPage === page
-                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200'
-                      : 'hover:bg-gray-50 text-gray-600 hover:shadow-sm'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200'
+                    : 'hover:bg-gray-50 text-gray-600 hover:shadow-sm'
                     }`}
                 >
                   {page}

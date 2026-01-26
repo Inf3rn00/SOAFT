@@ -15,7 +15,7 @@ const HeroSection = () => {
           <Link to="/login"><button className="bg-background-blue text-white w-[150px] h-[48px] rounded-lg text-[16px] hover: cursor-pointer">
             Get Started Free
           </button></Link>
-          
+
           <div className="flex content-center gap-2">
             <section className="flex relative">
               <img
@@ -58,7 +58,7 @@ const HeroSection = () => {
         </section>
       </div>
       <img
-        src="images/DownCurve.svg"
+        src="/images/DownCurve.svg"
         className="absolute w-full  rotate-180 bottom-[-15px] h-[100px]"
         alt=""
       />

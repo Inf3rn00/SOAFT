@@ -32,7 +32,7 @@ const SecondHero = () => {
           </p>
         </div>
         <img
-          src="images/DownCurve.svg"
+          src="/images/DownCurve.svg"
           className="absolute w-full top-[485px] h-[100px]"
           alt=""
         />

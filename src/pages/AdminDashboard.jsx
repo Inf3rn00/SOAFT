@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     <div className="bg-background-offwhite w-full h-full overflow-y-auto font-sans">
       <div className="p-5 flex justify-between items-center">
         <div>
-          <h1 className="text-[32px] font-semibold cursor-pointer">Dashboard</h1>
+          <h1 className="text-[2rem] font-semibold cursor-pointer">Dashboard</h1>
           <p className="text-[#6c757d] mt-2">Welcome back, professor Ogunleye</p>
         </div>
         <div className="flex items-center gap-4">

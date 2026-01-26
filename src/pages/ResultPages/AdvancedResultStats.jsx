@@ -63,7 +63,7 @@ const AdvancedResultStats = () => {
       <div>
         <section className="p-5 flex justify-between items-center w-full">
           <div>
-            <h1 className="text-[32px] font-semibold">Assessment Result</h1>
+            <h1 className="text-[2rem] font-semibold">Assessment Result</h1>
             <p className="text-[#6c757d] mt-2">
               Total 245 assessments completed
             </p>

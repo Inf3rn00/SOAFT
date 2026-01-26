@@ -8,13 +8,17 @@
   --color-purple: #8743be;
   --color-black: #000000;
   --color-lavendar: #d8dcf8;
-  --color-light-blue: #4A90E2; 
+  --color-light-blue: #4A90E2;
   --color-yellow: #E5BE46;
   --font-Sonsie-One: "Sonsie One", cursive;
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Apply global font and reset */
+html {
+  font-size: 80%;
+}
+
 body {
   font-family: var(--font-sans);
 }

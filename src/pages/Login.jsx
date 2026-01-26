@@ -7,9 +7,9 @@ import Navbar from "../components/Navbar";
 import { TextField, Checkbox, FormControlLabel } from "@mui/material";
 
 // Asset Imports
-import Ai_icon from "/Icons/Form icons/Ai - powered icon.svg";
-import Built_in_plagiarism from "/Icons/Form icons/Built-In plagiarism icon.svg";
-import Distraction_Free from "/Icons/Form icons/DistractionFree icon.svg";
+import Ai_icon from "/Icons/Form Icons/Ai - powered Icon.svg";
+import Built_in_plagiarism from "/Icons/Form Icons/Built-In plagiarism Icon.svg";
+import Distraction_Free from "/Icons/Form Icons/DistractionFree Icon.svg";
 
 /**
  * ZOD VALIDATION SCHEMAS
@@ -119,7 +119,7 @@ const Login = () => {
       <Navbar />
       <div className="flex justify-center items-start py-12">
         {/* Container for Left (Branding) and Right (Form) panels */}
-        <div className="flex items-stretch shadow-2xl rounded-xl overflow-hidden w-[1000px] min-h-[600px]">
+        <div className="flex items-stretch shadow-2xl rounded-xl overflow-hidden w-[62.5rem] min-h-[37.5rem]">
 
           {/* ========== LEFT PANEL: BRANDING & FEATURES ========== */}
           <div className="bg-[#5046e5] p-10 text-white w-1/2 flex flex-col justify-between">
@@ -215,7 +215,7 @@ const Login = () => {
                             />
                           )}
                         </Field>
-                        <ErrorMessage name="terms" component="small" className="text-[#DC3545] text-[11px] block ml-3" />
+                        <ErrorMessage name="terms" component="small" className="text-[#DC3545] text-[0.6875rem] block ml-3" />
                       </div>
                     </>
                   ) : (

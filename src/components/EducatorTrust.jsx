@@ -7,7 +7,7 @@ const EducatorTrust = () => {
   return (
     <div className="bg-background-offwhite flex p-4 relative">
       <img
-        src="images/greyCurve.svg"
+        src="/images/greyCurve.svg"
         className="absolute w-full  rotate-180 top-[-90px] h-[100px] left-0 fill-background-offwhite"
         alt=""
       />

@@ -1,8 +1,8 @@
 import React from "react";
-import ActiveTest from "/Icons/Admin page Icons/ActiveTest.svg";
-import totalStudents from "/Icons/Admin page Icons/TotalStudent.svg";
-import Submissions from "/Icons/Admin page Icons/Submission.svg";
-import PendingGrading from "/Icons/Admin page Icons/PendingGrade.svg";
+import ActiveTest from "/Icons/Admin page icons/ActiveTest.svg";
+import totalStudents from "/Icons/Admin page icons/TotalStudent.svg";
+import Submissions from "/Icons/Admin page icons/Submission.svg";
+import PendingGrading from "/Icons/Admin page icons/PendingGrade.svg";
 
 const AdminStatisticsCard = () => {
   const statistics = [
@@ -54,9 +54,8 @@ const AdminStatisticsCard = () => {
               <p className="text-[28px] font-semibold">{stat.quantity}</p>
               {/* Statistics Percentage */}
               <p
-                className={`text-sm flex gap-x-4 ${
-                  stat.percentage > 0 ? "text-green-500" : "text-red-500"
-                }`}
+                className={`text-sm flex gap-x-4 ${stat.percentage > 0 ? "text-green-500" : "text-red-500"
+                  }`}
               >
                 {stat.percentage > 0 ? "+" : "-"}
                 {Math.abs(stat.percentage)}%{/* Statistics Update From */}
