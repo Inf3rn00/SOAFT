@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { FaDownload } from "react-icons/fa";
+import filterIcon from "/Icons/Result page icons/FilterIcon.svg";
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { submittedTime } from "../../utils/timeUtils.js";
