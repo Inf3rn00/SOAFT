@@ -44,7 +44,7 @@ const AdminSidebar = () => {
             <footer className='flex flex-col justify-center bg-[#f4f4f7] rounded-xl p-5 gap-5 mb-5 w-[90%]'>
                 <h1 className='text-[22px] font-semibold mt-2'>Need Help</h1>
                 <p className='text-[14px] text-[#6b6b6b]'>Check our documentation or contact support for Assistance</p>
-                <Link to="/help" className="text-center font-semibold text-[#5046E5] px-4 py-2 rounded-lg border border-[#e5e5e5]">View help center</Link>
+                <Link to="/" className="text-center font-semibold text-[#5046E5] px-4 py-2 rounded-lg border border-[#e5e5e5]">View help center</Link>
             </footer>
         </nav>
     );

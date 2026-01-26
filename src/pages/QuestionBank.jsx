@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from "react";
 import deleteBtn from "/Icons/Question Bank Icons/deleteBtn.svg";
 import copyIcon from "/Icons/Question Bank Icons/copyicon.svg";
@@ -15,7 +16,7 @@ const QuestionBank = () => {
   const [sort, setSort] = useState(""); // Selected sort option
   const [checkedItems, setCheckedItems] = useState({})
 
-; // Object tracking checkbox states
+    ; // Object tracking checkbox states
 
   // Main data array - holds all question objects
   const [questionData, setquestionData] = useState([
@@ -216,11 +217,53 @@ const QuestionBank = () => {
     },
   ]);
 
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   // Computed boolean - checks if all visible questions are selected
   // Returns true when questionData has items AND every item's ID exists in checkedItems
   const isAllSelected =
     questionData.length > 0 &&
     questionData.every((item) => checkedItems[item.id]);
+
+  /**
+   * Filter & Sort Logic
+   */
+  const getFilteredData = () => {
+    let data = [...questionData];
+
+    if (subject) {
+      data = data.filter((item) => item.subject === subject);
+    }
+    if (question) {
+      data = data.filter((item) => item.type === question);
+    }
+
+    if (sort === "Recent") {
+      // Assuming higher ID is more recent or use lastUsage date
+      data.sort((a, b) => new Date(b.lastUsage) - new Date(a.lastUsage));
+    } else if (sort === "Oldest") {
+      data.sort((a, b) => new Date(a.lastUsage) - new Date(b.lastUsage));
+    } else if (sort === "A-Z") {
+      data.sort((a, b) => a.question.localeCompare(b.question));
+    } else if (sort === "Z-A") {
+      data.sort((a, b) => b.question.localeCompare(a.question));
+    }
+
+    return data;
+  };
+
+  const filteredData = getFilteredData();
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = filteredData.slice(startIndex, startIndex + itemsPerPage);
+
+  // Reset page when filters change
+  // Note: We can use useEffect to reset page when filters change
+  // but for simplicity in this structure we can just ensure currentPage is valid render time or use simplified flow.
+  // Better to add useEffect:
+  // useEffect(() => setCurrentPage(1), [subject, question, sort]); -> Need to import useEffect
 
   /**
    * Single Item Deletion Function
@@ -248,14 +291,13 @@ const QuestionBank = () => {
 
     // Create CSV header row with column names
     const csvHeaders = "ID,Question,Subject,Type,Last Usage\n";
-    
+
     // Transform each selected item into CSV row format
     const csvContent = selectedItems
       .map(
         (item) =>
           // Escape quotes in questions by doubling them (CSV standard)
-          `${item.id},"${item.question.replace(/"/g, '""')}",${item.subject},${
-            item.type
+          `${item.id},"${item.question.replace(/"/g, '""')}",${item.subject},${item.type
           },${item.lastUsage}`
       )
       .join("\n"); // Join all rows with newlines
@@ -267,7 +309,7 @@ const QuestionBank = () => {
     const blob = new Blob([finalCsvContent], {
       type: "text/csv;charset=utf-8;",
     });
-    
+
     // Create temporary DOM link element for download
     const link = document.createElement("a");
 
@@ -384,10 +426,12 @@ const QuestionBank = () => {
    */
   const handleChange = (event) => {
     setSubject(event.target.value);
+    setCurrentPage(1);
   };
 
   const handleChangeQuestion = (event) => {
     setquestion(event.target.value);
+    setCurrentPage(1);
   };
 
   const handleChangeSort = (event) => {
@@ -401,14 +445,17 @@ const QuestionBank = () => {
   const clearAll = () => {
     setSubject("");
     setquestion("");
+    setCurrentPage(1);
   };
 
   const clearInput = () => {
     setquestion("");
+    setCurrentPage(1);
   };
 
   const clearinputSubject = () => {
     setSubject("");
+    setCurrentPage(1);
   };
 
   /**
@@ -439,11 +486,11 @@ const QuestionBank = () => {
   };
 
   return (
-    <div className="bg-background-offwhite w-full overflow-hidden  ">
+    <div className="bg-background-offwhite w-full h-full overflow-y-auto font-sans">
       {/* PAGE HEADER SECTION */}
       <section className="p-5 flex justify-between items-center w-full">
         <div>
-          <h1 className="text-[32px] font-semibold">Question Bank</h1>
+          <h1 className="text-[32px] font-semibold ">Question Bank</h1>
           <p className="text-[rgb(108,117,125)] mt-2">
             Create, manage and organize your question library all in one place
           </p>
@@ -452,9 +499,9 @@ const QuestionBank = () => {
 
       {/* FILTER CONTROLS SECTION */}
       <section className="p-5 w-full">
-        <div className="bg-white rounded-lg shadow-md p-5 flex justify-between  gap-20">
+        <div className="bg-white rounded-lg shadow-md p-5 flex justify-between gap-20">
           <div className="flex gap-5 w-3/4">
-            
+
             {/* Subject Filter Column */}
             <div className="w-1/3 flex flex-col gap-5">
               <FormControl fullWidth>
@@ -471,7 +518,7 @@ const QuestionBank = () => {
                   <MenuItem value={"Mathematics"}>Mathematics</MenuItem>
                   <MenuItem value={"Biology"}>Biology</MenuItem>
                   <MenuItem value={"Statistics"}>Statistics</MenuItem>
-                  <MenuItem value={"Computer"}>Computer</MenuItem>
+                  <MenuItem value={"Computer"}>Computer Science</MenuItem>
                 </Select>
               </FormControl>
 
@@ -526,7 +573,7 @@ const QuestionBank = () => {
             {/* Clear All Filters Button - Only shows when both filters active */}
             {subject && question ? (
               <p
-                className=" text-background-blue font-bold px-4 py-2 rounded-lg gap-1 cursor-pointer h-[40px] self-end"
+                className=" text-background-blue px-4 py-2 rounded-lg gap-1 cursor-pointer h-[40px] self-end"
                 onClick={clearAll}
               >
                 Clear All
@@ -570,10 +617,10 @@ const QuestionBank = () => {
 
       {/* MAIN TABLE SECTION */}
       <section className="p-5 flex gap-5 ">
-        <div className="bg-white rounded-lg shadow-md  w-full">
-          
+        <div className="bg-white rounded-lg shadow-md w-full border-none overflow-hidden  flex flex-col min-h-[500px]">
+
           {/* Table Header with Bulk Actions */}
-          <header className="flex justify-between items-center p-5">
+          <header className="flex justify-between items-center p-5 border-b border-gray-100">
             <div className="flex items-center w-1/3 gap-2">
               {/* Master Select All Checkbox */}
               <Checkbox
@@ -590,28 +637,33 @@ const QuestionBank = () => {
                   marginLeft: "-10px",
                 }}
               />
-              Select All
+              <span className="text-sm font-medium text-gray-700">Select All</span>
+              {getSelectedCount() > 0 && (
+                <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full font-medium ml-2">
+                  {getSelectedCount()} selected
+                </span>
+              )}
             </div>
 
             {/* Bulk Action Buttons */}
             <div className="flex gap-10">
-              <p className="flex gap-3 items-center cursor-pointer ">
+              <p className="flex gap-3 items-center cursor-pointer text-gray-600 hover:text-indigo-600 transition-colors">
                 <img
                   src={downloadIcon}
                   onClick={handleBulkExport}
                   alt="Export selected questions"
                   className="cursor-pointer  hover:scale-110"
                 />
-                Export {getSelectedCount() > 0 && `(${getSelectedCount()})`}
+                <span onClick={handleBulkExport}>Export {getSelectedCount() > 0 && `(${getSelectedCount()})`}</span>
               </p>
-              <p className="flex gap-3 items-center cursor-pointer">
+              <p className="flex gap-3 items-center cursor-pointer text-gray-600 hover:text-red-500 transition-colors">
                 <img
                   src={trashIcon}
                   onClick={handleBulkDelete}
                   alt="Delete selected questions"
                   className="cursor-pointer  hover:scale-110"
                 />
-                Delete {getSelectedCount() > 0 && `(${getSelectedCount()})`}
+                <span onClick={handleBulkDelete}>Delete {getSelectedCount() > 0 && `(${getSelectedCount()})`}</span>
               </p>
             </div>
           </header>
@@ -619,7 +671,7 @@ const QuestionBank = () => {
           {/* Data Table */}
           <table className="text-left w-full">
             {/* Table Column Headers */}
-            <thead className="h-20 bg-background-offwhite text-md font-semibold">
+            <thead className="h-20 bg-background-offwhite text-md font-semibold border-b border-gray-100">
               <tr className="">
                 <th className="pl-14  ">QUESTION</th>
                 <th>SUBJECT</th>
@@ -631,84 +683,132 @@ const QuestionBank = () => {
 
             {/* Table Body - Dynamic Rows */}
             <tbody className="text-sm">
-              {questionData.map((item) => (
-                <tr key={item.id} className="border-b border-gray-100">
-                  
-                  {/* Question Text Column with Individual Checkbox */}
-                  <td className="py-4 pl-2">
-                    <div className="flex  gap-2 items-center">
-                      <Checkbox
-                        checked={checkedItems[item.id] || false}
-                        onChange={() => handleItemCheck(item.id)}
-                        inputProps={{ "aria-label": `Select question ${item.id}` }}
-                        sx={{
-                          "&.Mui-checked": {
-                            color: "#5046e5",
-                          },
-                          "&:hover": {
-                            backgroundColor: "rgba(80, 70, 229, 0.04)",
-                          },
-                        }}
-                      />
-                      {/* Truncated question text */}
-                      <span className="leading-relaxed">
-                        {item.question.length > 50
-                          ? `${item.question.substring(0, 50)}...`
-                          : item.question}
-                      </span>
-                    </div>
-                  </td>
+              {currentData.length > 0 ? (
+                currentData.map((item) => (
+                  <tr key={item.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
 
-                  {/* Subject Column */}
-                  <td className="px-5">{item.subject}</td>
+                    {/* Question Text Column with Individual Checkbox */}
+                    <td className="py-4 pl-2">
+                      <div className="flex  gap-2 items-center">
+                        <Checkbox
+                          checked={checkedItems[item.id] || false}
+                          onChange={() => handleItemCheck(item.id)}
+                          inputProps={{ "aria-label": `Select question ${item.id}` }}
+                          sx={{
+                            "&.Mui-checked": {
+                              color: "#5046e5",
+                            },
+                            "&:hover": {
+                              backgroundColor: "rgba(80, 70, 229, 0.04)",
+                            },
+                          }}
+                        />
+                        {/* Truncated question text */}
+                        <span className="leading-relaxed font-medium text-gray-900">
+                          {item.question.length > 50
+                            ? `${item.question.substring(0, 50)}...`
+                            : item.question}
+                        </span>
+                      </div>
+                    </td>
 
-                  {/* Question Type Column with Colored Badge */}
-                  <td>
-                    <div
-                      className={`${questionTypeColour(
-                        item.type
-                      )} py-3 px-3 rounded-[30px] text-center`}
-                    >
-                      {item.type}
-                    </div>
-                  </td>
+                    {/* Subject Column */}
+                    <td className="px-5 text-gray-600">{item.subject}</td>
 
-                  {/* Last Usage Date Column */}
-                  <td className="px-5">{item.lastUsage}</td>
+                    {/* Question Type Column with Colored Badge */}
+                    <td>
+                      <div
+                        className={`${questionTypeColour(
+                          item.type
+                        )} py-3 px-3 rounded-[30px] text-center w-fit text-xs font-semibold`}
+                      >
+                        {item.type}
+                      </div>
+                    </td>
 
-                  {/* Action Buttons Column */}
-                  <td className="px-5">
-                    <div className="flex gap-4 text-gray-600 ">
-                      {/* Copy Question Button */}
-                      <img
-                        src={copyIcon}
-                        alt="Copy question to clipboard"
-                        className="cursor-pointer  hover:scale-110"
-                        onClick={() => copyToClipboard(item.question)}
-                      />
-                      {/* Edit Question Button */}
-                      <img
-                        src={editIcon}
-                        alt="Edit question"
-                        className="cursor-pointer  hover:scale-110"
-                      />
-                      {/* Delete Single Question Button */}
-                      <img
-                        src={trashIcon}
-                        alt="Delete question"
-                        className="cursor-pointer  hover:scale-110"
-                        onClick={() => {
-                          confirm("Do you want to delete this item?")
-                            ? deleteElement(item.id)
-                            : null;
-                        }}
-                      />
-                    </div>
+                    {/* Last Usage Date Column */}
+                    <td className="px-5 text-gray-600">{item.lastUsage}</td>
+
+                    {/* Action Buttons Column */}
+                    <td className="px-5">
+                      <div className="flex gap-4 text-gray-400 items-center justify-center">
+                        {/* Copy Question Button */}
+                        <div title="Copy" className="hover:scale-110 transition-transform cursor-pointer">
+                          <FaCopy size={18} onClick={() => copyToClipboard(item.question)} className="hover:text-indigo-600" />
+                        </div>
+                        {/* Edit Question Button */}
+                        <div title="Edit" className="hover:scale-110 transition-transform cursor-pointer">
+                          <img
+                            src={editIcon}
+                            alt="Edit question"
+                            className="cursor-pointer"
+                          />
+                        </div>
+                        {/* Delete Single Question Button */}
+                        <div title="Delete" className="hover:scale-110 transition-transform cursor-pointer">
+                          <img
+                            src={trashIcon}
+                            alt="Delete question"
+                            className="cursor-pointer"
+                            onClick={() => {
+                              confirm("Do you want to delete this item?")
+                                ? deleteElement(item.id)
+                                : null;
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="py-20 text-center text-gray-400">
+                    No questions found matching your filters.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
+
+          {/* Footer / Pagination */}
+          <div className="mt-auto p-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white text-sm">
+            <p className="text-sm text-gray-500">
+              Showing <span className="font-medium">{filteredData.length > 0 ? startIndex + 1 : 0}</span> to <span className="font-medium">{Math.min(startIndex + itemsPerPage, filteredData.length)}</span> Out of <span className="font-medium">{filteredData.length}</span>
+            </p>
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 bg-white text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              {/* Dynamic Page Numbers */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-all ${currentPage === page
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200'
+                      : 'hover:bg-gray-50 text-gray-600 hover:shadow-sm'
+                    }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages || totalPages === 0}
+                className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 bg-white text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

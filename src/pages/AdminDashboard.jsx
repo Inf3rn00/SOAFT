@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="bg-[#f0f1f2] w-full">
+    <div className="bg-background-offwhite w-full h-full overflow-y-auto font-sans">
       <div className="p-5 flex justify-between items-center">
         <div>
           <h1 className="text-[32px] font-semibold cursor-pointer">Dashboard</h1>
@@ -23,12 +23,12 @@ const AdminDashboard = () => {
             <BiCalendar size={20} className="text-gray-500" />
             <span className="text-gray-700 font-medium">June 10, 2025</span>
           </div>
-          <button className="flex items-center bg-[#5046e5] text-[#ffffff] font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer" onClick={()=> alert("Button clicked")}>
+          <button className="flex items-center bg-[#5046e5] text-[#ffffff] font-bold px-4 py-2 rounded-lg gap-2 cursor-pointer" onClick={() => alert("Button clicked")}>
             <PiPlus size={18} /> Create test
           </button>
         </div>
       </div>
-        <AdminStatisticsCard />
+      <AdminStatisticsCard />
       <div className="p-5 flex gap-x-6">
         <div className="w-[70%]">
           <TestPerformanceChart />
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
           <SecurityAlert />
         </div>
       </div>
-      
+
     </div>
   );
 };

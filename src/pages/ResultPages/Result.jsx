@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { FaDownload } from "react-icons/fa";
-import { useState } from "react";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import filterIcon from "/Icons/Result page icons/FilterIcon.svg";
 import AdvancedResults from "./AdvancedResults";
 import { Link } from "react-router-dom";
@@ -70,78 +70,85 @@ const Result = () => {
       </section>
 
       <section className="p-5 w-full">
-        {/*i still need to work on the cancel filter and apply button*/}
         <div className="bg-white rounded-lg shadow-md p-5">
-          <form className="flex gap-5 justify-between">
-            {/* Date Range */}
-            <div className="flex flex-col">
-              <label htmlFor="date-range" className="mb-1">
-                Date Range
-              </label>
-              <input
-                type="date"
+          <form className="flex gap-5 justify-between items-start">
+            {/* Date Range - Using TextField for consistency */}
+            <div className="flex flex-col w-full">
+              <TextField
                 id="date-range"
+                label="Date Range"
+                type="date"
                 value={dateRange}
                 onChange={handleDateChange}
-                className="border-1 border-gray-300 rounded px-3 py-2"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                className="bg-white"
+                size="small"
+                fullWidth
               />
             </div>
 
             {/* Course Dropdown */}
-            <div className="flex flex-col">
-              <label htmlFor="select-course" className="mb-1">
-                Course
-              </label>
-              <select
-                value={course}
-                onChange={handleCourseChange}
-                id="select-course"
-                className="border-1 border-gray-300 rounded px-3 py-2 "
-              >
-                <option value="">Select Course</option>
-                <option value="course1">Course 1</option>
-                <option value="course2">Course 2</option>
-              </select>
+            <div className="flex flex-col w-full">
+              <FormControl fullWidth size="small">
+                <InputLabel id="course-select-label">Course</InputLabel>
+                <Select
+                  labelId="course-select-label"
+                  id="select-course"
+                  value={course}
+                  label="Course"
+                  onChange={handleCourseChange}
+                  className="bg-white"
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  <MenuItem value="course1">Course 1</MenuItem>
+                  <MenuItem value="course2">Course 2</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
             {/* Status Dropdown */}
-            <div className="flex flex-col">
-              <label htmlFor="status" className="mb-1">
-                Status
-              </label>
-              <select
-                value={status}
-                onChange={handleStatusChange}
-                id="status"
-                className="border-1 border-gray-300 rounded px-3 py-2 "
-              >
-                <option value="">Select Status</option>
-                <option value="completed">Completed</option>
-                <option value="in-progress">In Progress</option>
-                <option value="not-started">Not Started</option>
-              </select>
+            <div className="flex flex-col w-full">
+              <FormControl fullWidth size="small">
+                <InputLabel id="status-select-label">Status</InputLabel>
+                <Select
+                  labelId="status-select-label"
+                  id="status"
+                  value={status}
+                  label="Status"
+                  onChange={handleStatusChange}
+                  className="bg-white"
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  <MenuItem value="completed">Completed</MenuItem>
+                  <MenuItem value="in-progress">In Progress</MenuItem>
+                  <MenuItem value="not-started">Not Started</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
             {/* Score Range */}
-            <div className="flex flex-col">
-              <label className="mb-1">Score Range</label>
+            <div className="flex flex-col w-full">
               <div className="flex items-center gap-2">
-                <input
+                <TextField
                   type="number"
-                  placeholder="Min"
+                  label="Min Score"
                   value={minScore}
                   onChange={handleMinScoreChange}
-                  className="border-1 border-gray-300 rounded px-3 py-2 w-20"
-                  min="0"
+                  size="small"
+                  className="bg-white"
+                  InputProps={{ inputProps: { min: 0 } }}
                 />
-                <span className="text-xl font-bold text-gray-600">–</span>
-                <input
+                <span className="text-xl font-bold text-gray-400">–</span>
+                <TextField
                   type="number"
-                  placeholder="Max"
+                  label="Max Score"
                   value={maxScore}
                   onChange={handleMaxScoreChange}
-                  className="border-1 border-gray-300 rounded px-3 py-2 w-20"
-                  min="0"
+                  size="small"
+                  className="bg-white"
+                  InputProps={{ inputProps: { min: 0 } }}
                 />
               </div>
             </div>

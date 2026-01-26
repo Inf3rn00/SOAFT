@@ -10,8 +10,13 @@
   --color-lavendar: #d8dcf8;
   --color-light-blue: #4A90E2; 
   --color-yellow: #E5BE46;
-  --font-Sonsie-One: Sonsie One, sans-serif;
-  --font-Monteserrat: Montserrat, sans-serif;
+  --font-Sonsie-One: "Sonsie One", cursive;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Apply global font and reset */
+body {
+  font-family: var(--font-sans);
 }
 
 /* Target only the floating elements */
