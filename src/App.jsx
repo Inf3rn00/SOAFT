@@ -8,7 +8,7 @@ import ResultLayout from "./pages/ResultPages/ResultLayout.jsx";
 import Result from "./pages/ResultPages/Result.jsx";
 import StudentView from "./pages/studentViewPages/studentView.jsx";
 import useIsDesktop from "./hooks/useIsDesktop.jsx";
-import MobileBlocker from "./components/mobileBlocker.jsx";
+import MobileBlocker from "./components/MobileBlocker.jsx";
 
 function App() {
   // 1024px is standard for iPad Pro landscape / Small Laptops

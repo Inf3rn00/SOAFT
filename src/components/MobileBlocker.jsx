@@ -1,4 +1,3 @@
-import React from "react";
 
 const MobileBlocker = () => {
   return (
@@ -9,7 +8,6 @@ const MobileBlocker = () => {
           This application is designed for large screens to ensure the best experience. 
           Please open this link on your desktop or laptop computer.
         </p>
-        {/* <div className="text-4xl">💻 🚫 📱</div> */}
       </div>
     </div>
   );
